@@ -5,8 +5,9 @@ import foto2 from "../assets/foto2.jpg";
 import foto3 from "../assets/foto3.jpg";
 import foto4 from "../assets/foto4.jpg";
 import foto5 from "../assets/foto5.jpg";
+import img1 from "../assets/WhatsApp Image 2025-05-07 at 6.35.04 PM.jpeg";
 
-const allFotos = [foto1, foto2, foto3, foto4, foto5];
+const allFotos = [foto1, img1, foto3, foto4, foto5];
 const titles = ["Chamarras", "Chalecos", "Uniformes", "Puños", "Otros"];
 
 function getRandomImage(exclude) {

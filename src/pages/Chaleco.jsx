@@ -1,7 +1,14 @@
 import React from "react";
-import foto3 from "../assets/foto3.jpg";
-import foto4 from "../assets/foto4.jpg";
 import { useNavigate } from "react-router-dom";
+import img1 from "../assets/WhatsApp Image 2025-05-07 at 6.35.04 PM.jpeg";
+import img2 from "../assets/WhatsApp Image 2025-05-09 at 5.27.17 PM.jpeg";
+import img3 from "../assets/WhatsApp Image 2025-05-09 at 5.27.17 PM (1).jpeg";
+import img4 from "../assets/WhatsApp Image 2025-05-09 at 5.27.17 PM (3).jpeg";
+import img5 from "../assets/WhatsApp Image 2025-05-12 at 5.00.10 PM.jpeg";
+import img6 from "../assets/WhatsApp Image 2025-05-12 at 5.00.11 PM (3).jpeg";
+import img7 from "../assets/WhatsApp Image 2025-05-12 at 5.00.11 PM (4).jpeg";
+import img8 from "../assets/WhatsApp Image 2025-05-12 at 5.00.12 PM (1).jpeg";
+import img9 from "../assets/WhatsApp Image 2025-05-12 at 5.00.13 PM.jpeg";
 
 const gridStyle = {
   display: "grid",
@@ -31,6 +38,8 @@ const arrowStyle = {
   alignItems: "center"
 };
 
+const chalecoImages = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
+
 const Chaleco = () => {
   const navigate = useNavigate();
   return (
@@ -38,8 +47,9 @@ const Chaleco = () => {
       <button style={arrowStyle} onClick={() => navigate('/productos')} aria-label="Volver a productos">←</button>
       <h1 style={{ textAlign: "center", margin: "32px 0 16px 0", color: "#db1c7c", fontWeight: 700 }}>Chalecos</h1>
       <div style={gridStyle}>
-        <img src={foto3} alt="Chaleco 1" style={imgStyle} />
-        <img src={foto4} alt="Chaleco 2" style={imgStyle} />
+        {chalecoImages.map((img, idx) => (
+          <img key={idx} src={img} alt={`Chaleco ${idx + 1}`} style={imgStyle} />
+        ))}
       </div>
     </div>
   );
