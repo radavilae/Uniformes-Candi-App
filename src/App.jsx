@@ -8,7 +8,6 @@ import Carousel from "./components/Carousel";
 import Nosotros from "./pages/Nosotros";
 import Contacto from "./pages/Contacto";
 import Mosaico from "./components/Mosaico";
-import videoCandi from "./assets/Video -candi.mp4";
 import c40anos from "./assets/40años.jpeg";
 import Productos from "./pages/Productos";
 import Chamarra from "./pages/Chamarra";
@@ -49,7 +48,7 @@ function App() {
                     cursor: "pointer",
                     outline: "none",
                     display: "block",
-                    margin: "0 auto 60px auto"
+                    margin: "0 auto 60px auto",
                   }}
                   aria-label="Mostrar información de Nosotros"
                 >
@@ -63,36 +62,41 @@ function App() {
                       objectFit: "cover",
                       boxShadow: "0 4px 24px rgba(0,0,0,0.25)",
                       border: "8px solid #fff",
-                      background: "#fff"
+                      background: "#fff",
                     }}
                   />
                 </button>
-                <div className="innovative-video-wrapper">
-                  <iframe
-                    src="https://player.mux.com/sOeilQisnfyn2I4adlUglkOC89xkmZlW2oSH1jDgIXY?autoplay=1&muted=1"
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowFullScreen
-                    title="Video Candi"
-                    className="innovative-video"
-                    style={{ border: 'none', width: '100%', height: '60vw', maxHeight: '700px', minHeight: '320px', display: 'block', margin: '0 auto' }}
-                  />
-                </div>
+
                 {showNosotros && (
                   <div className="popup-overlay" onClick={handleClose}>
                     <div
                       className="popup-modal"
-                      onClick={e => e.stopPropagation()}
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      <button
-                        onClick={handleClose}
-                        aria-label="Cerrar"
-                      >
+                      <button onClick={handleClose} aria-label="Cerrar">
                         ×
                       </button>
                       <Nosotros />
                     </div>
                   </div>
                 )}
+                <div className="innovative-video-wrapper">
+                  <iframe
+                    src="https://player.mux.com/sOeilQisnfyn2I4adlUglkOC89xkmZlW2oSH1jDgIXY?metadata-video-title=Videocandi&autoplay=1"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowFullScreen
+                    title="Videocandi"
+                    style={{
+                      width: "100%",
+                      minHeight: "420px",
+                      aspectRatio: "16/9",
+                      border: "none",
+                      borderRadius: "0",
+                      display: "block",
+                      margin: "0 auto"
+                    }}
+                  />
+                </div>
               </header>
             }
           />
@@ -105,7 +109,6 @@ function App() {
           <Route path="/productos/3" element={<Uniforme />} />
           <Route path="/productos/4" element={<Puno />} />
           <Route path="/productos/5" element={<Otro />} />
-
         </Routes>
       </div>
     </Router>
@@ -113,5 +116,3 @@ function App() {
 }
 
 export default App;
-
-

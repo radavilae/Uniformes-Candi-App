@@ -1,7 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import foto5 from "../assets/foto5.jpg";
 import foto1 from "../assets/foto1.jpg";
+import { useNavigate } from "react-router-dom";
 
 const gridStyle = {
   display: "grid",
@@ -20,28 +20,22 @@ const imgStyle = {
   boxShadow: "0 4px 24px rgba(219,28,124,0.10)",
 };
 
-const backStyle = {
-  display: "inline-flex",
-  alignItems: "center",
-  gap: "8px",
+const arrowStyle = {
+  fontSize: "2rem",
   color: "#db1c7c",
-  fontWeight: 600,
-  fontSize: "1.1rem",
-  cursor: "pointer",
-  margin: "24px 0 0 24px",
-  textDecoration: "none",
+  background: "none",
   border: "none",
-  background: "none"
+  cursor: "pointer",
+  margin: "24px 0 0 12px",
+  display: "flex",
+  alignItems: "center"
 };
 
 const Uniforme = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <button style={backStyle} onClick={() => navigate('/productos')}>
-        <span style={{ fontSize: "1.6rem", lineHeight: 1, display: "inline-block", transform: "translateY(2px)" }}>&larr;</span>
-        Volver a Productos
-      </button>
+      <button style={arrowStyle} onClick={() => navigate('/productos')} aria-label="Volver a productos">←</button>
       <h1 style={{ textAlign: "center", margin: "32px 0 16px 0", color: "#db1c7c", fontWeight: 700 }}>Uniformes</h1>
       <div style={gridStyle}>
         <img src={foto5} alt="Uniforme 1" style={imgStyle} />
