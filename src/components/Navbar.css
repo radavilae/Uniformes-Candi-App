@@ -1,0 +1,154 @@
+.navbar {
+  width: 100%;
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  margin-bottom: 32px;
+  margin-top: 32px;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
+}
+
+.navbar-container {
+  width: 100%;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.nav-brand a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #333;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 3px;
+  background-color: #333;
+  transition: all 0.3s ease;
+}
+
+.hamburger-line.open:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger-line.open:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-line.open:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Navigation Links (base) */
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links li a {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #333;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #222;
+  text-shadow: 0 4px 24px #fff, 0 0px 8px #fff, 0 0 2px #fff;
+  font-weight: 700;
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .hamburger-menu {
+    display: flex;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+    padding: 2rem;
+    gap: 2rem;
+    transition: right 0.3s ease-in-out;
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links li a {
+    font-size: 1.2rem;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 769px) {
+  .nav-links {
+    flex-direction: row;
+    align-items: center;
+    position: static;
+    height: auto;
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .nav-links li a {
+    font-size: 1rem;
+  }
+
+  .hamburger-menu {
+    display: none;
+  }
+}
+
+/* Larger screens */
+@media screen and (min-width: 1024px) {
+  .navbar-container {
+    padding: 1rem 2rem;
+  }
+
+  .nav-brand a {
+    font-size: 1.3rem;
+  }
+
+  .nav-links {
+    gap: 2.5rem;
+  }
+}
