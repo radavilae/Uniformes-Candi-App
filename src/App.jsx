@@ -82,7 +82,7 @@ function App() {
                 )}
                 <div className="innovative-video-wrapper">
                   <iframe
-                    src="https://player.mux.com/sOeilQisnfyn2I4adlUglkOC89xkmZlW2oSH1jDgIXY?metadata-video-title=Videocandi&autoplay=1"
+                    src="https://player.mux.com/sOeilQisnfyn2I4adlUglkOC89xkmZlW2oSH1jDgIXY?metadata-video-title=Videocandi&autoplay=1&muted=1"
                     allow="autoplay; fullscreen; picture-in-picture"
                     allowFullScreen
                     title="Videocandi"
