@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import img1 from "../assets/sueter/mod-0009.jpg";
+import img1 from "../assets/sueter/MOD-0009.jpg";
 import img2 from "../assets/sueter/MOD-0013.jpg";
 import img3 from "../assets/sueter/MOD-0025.jpg";
 import img4 from "../assets/sueter/MOD-0034.jpg";
@@ -16,8 +16,8 @@ import img12 from "../assets/sueter/MOD-0179.jpg";
 import img13 from "../assets/sueter/MOD-0180.jpg";
 import img14 from "../assets/sueter/MOD-0183.jpg";
 import img15 from "../assets/sueter/MOD-0191.jpg";
-import img16 from "../assets/sueter/MOD.0118.jpg";
-import img17 from "../assets/sueter/mod.0185.jpg";
+import img16 from "../assets/sueter/MOD-0118.jpg";
+import img17 from "../assets/sueter/MOD-0185.jpg";
 
 const gridStyle = {
   display: "grid",
@@ -196,5 +196,3 @@ const Sueter = () => {
 };
 
 export default Sueter;
-
-

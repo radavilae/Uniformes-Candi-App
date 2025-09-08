@@ -44,7 +44,7 @@ import pant7 from "../assets/pants/MOD-0176.jpg";
 import pant8 from "../assets/pants/MOD-0181.jpg";
 import pant9 from "../assets/pants/MOD-0187.jpg";
 // Sueter photos
-import sueter1 from "../assets/sueter/mod-0009.jpg";
+import sueter1 from "../assets/sueter/MOD-0009.jpg";
 import sueter2 from "../assets/sueter/MOD-0013.jpg";
 import sueter3 from "../assets/sueter/MOD-0025.jpg";
 import sueter4 from "../assets/sueter/MOD-0034.jpg";
@@ -59,8 +59,8 @@ import sueter12 from "../assets/sueter/MOD-0179.jpg";
 import sueter13 from "../assets/sueter/MOD-0180.jpg";
 import sueter14 from "../assets/sueter/MOD-0183.jpg";
 import sueter15 from "../assets/sueter/MOD-0191.jpg";
-import sueter16 from "../assets/sueter/MOD.0118.jpg";
-import sueter17 from "../assets/sueter/mod.0185.jpg";
+import sueter16 from "../assets/sueter/MOD-0118.jpg";
+import sueter17 from "../assets/sueter/mod-0185.jpg";
 // Bata photos
 import bata1 from "../assets/bata/MOD-0090.jpg";
 // Sudadera photos
