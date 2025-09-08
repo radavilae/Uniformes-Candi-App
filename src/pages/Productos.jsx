@@ -71,7 +71,7 @@ import mandil1 from "../assets/mandil/MOD-0065.jpg";
 import playera1 from "../assets/playeras/MOD-0116.jpg";
 import playera2 from "../assets/playeras/MOD-0173.jpg";
 
-// const allFotos = [foto1, img1, foto3, foto4, foto5];
+const allFotos = [chamarra1, chaleco1, pantalon1, shorts1];
 const chamarraFotos = [
   chamarra1,
   chamarra2,
