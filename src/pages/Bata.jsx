@@ -34,8 +34,23 @@ const Bata = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <button style={arrowStyle} onClick={() => navigate('/productos')} aria-label="Volver a productos">←</button>
-      <h1 style={{ textAlign: "center", margin: "32px 0 16px 0", color: "#db1c7c", fontWeight: 700 }}>Bata</h1>
+      <button
+        style={arrowStyle}
+        onClick={() => navigate("/productos")}
+        aria-label="Volver a productos"
+      >
+        ←
+      </button>
+      <h1
+        style={{
+          textAlign: "center",
+          margin: "32px 0 16px 0",
+          color: "#db1c7c",
+          fontWeight: 700,
+        }}
+      >
+        Bata
+      </h1>
       <div style={gridStyle}>
         <img src={img1} alt="Bata 1" style={imgStyle} />
       </div>
@@ -44,5 +59,3 @@ const Bata = () => {
 };
 
 export default Bata;
-
-
