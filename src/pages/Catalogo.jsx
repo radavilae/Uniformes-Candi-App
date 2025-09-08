@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import catalogoPdf from "../assets/CATALOGO  CANDI 2025.pdf";
+import catalogoPdf from "../assets/CATALOGOCANDI2025.pdf";
 
 const pageStyle = {
   background: "linear-gradient(180deg, #fff 0%, #ffe6f1 60%, #ffffff 100%)",
@@ -101,17 +101,28 @@ function Catalogo() {
       <div style={containerStyle}>
         <div style={headerStyle}>
           <h1 style={titleStyle}>Catálogo</h1>
-          <div style={subtitleStyle}>Explora nuestro catálogo completo en PDF</div>
+          <div style={subtitleStyle}>
+            Explora nuestro catálogo completo en PDF
+          </div>
         </div>
 
         <div style={cardStyle} ref={viewerRef}>
           <div style={toolbarStyle}>
             <div style={badgeStyle}>CANDI 2025</div>
             <div style={actionsStyle}>
-              <a href={catalogoPdf} target="_blank" rel="noreferrer" style={{ ...buttonStyle, textDecoration: "none" }}>
+              <a
+                href={catalogoPdf}
+                target="_blank"
+                rel="noreferrer"
+                style={{ ...buttonStyle, textDecoration: "none" }}
+              >
                 Abrir en pestaña
               </a>
-              <a href={catalogoPdf} download style={{ ...buttonStyle, textDecoration: "none" }}>
+              <a
+                href={catalogoPdf}
+                download
+                style={{ ...buttonStyle, textDecoration: "none" }}
+              >
                 Descargar
               </a>
               <button onClick={handleFullscreen} style={buttonStyle}>
@@ -122,15 +133,26 @@ function Catalogo() {
 
           <div style={viewerWrapperStyle}>
             {/* Native PDF viewers with graceful fallback */}
-            <object data={catalogoPdf} type="application/pdf" style={viewerStyle}>
-              <embed src={catalogoPdf} type="application/pdf" style={viewerStyle} />
+            <object
+              data={catalogoPdf}
+              type="application/pdf"
+              style={viewerStyle}
+            >
+              <embed
+                src={catalogoPdf}
+                type="application/pdf"
+                style={viewerStyle}
+              />
               <p style={{ textAlign: "center", color: "#7a244f" }}>
-                Tu navegador no pudo mostrar el PDF. Puedes
-                {" "}
-                <a href={catalogoPdf} target="_blank" rel="noreferrer" style={{ color: "#db1c7c", fontWeight: 700 }}>
+                Tu navegador no pudo mostrar el PDF. Puedes{" "}
+                <a
+                  href={catalogoPdf}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ color: "#db1c7c", fontWeight: 700 }}
+                >
                   abrirlo aquí
-                </a>
-                {" "}
+                </a>{" "}
                 o descargarlo.
               </p>
             </object>
@@ -142,5 +164,3 @@ function Catalogo() {
 }
 
 export default Catalogo;
-
-
