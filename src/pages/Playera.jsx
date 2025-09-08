@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import img1 from "../assets/playeras/MOD-0116.jpg";
-import img2 from "../assets/playeras/MOD-0173.jpg";
+const img1 = new URL("../assets/playeras/MOD-0116.jpg", import.meta.url).href;
+const img2 = new URL("../assets/playeras/MOD-0173.jpg", import.meta.url).href;
 
 const gridStyle = {
   display: "grid",
