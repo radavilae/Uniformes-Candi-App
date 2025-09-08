@@ -28,7 +28,7 @@ import pantalon2 from "../assets/pantalon/MOD-0171.jpg";
 import shorts1 from "../assets/shorts/MOD-00012.jpg";
 import shorts2 from "../assets/shorts/MOD-0163.jpg";
 import shorts3 from "../assets/shorts/MOD-0167.jpg";
-// Falda photos 
+// Falda photos
 import falda1 from "../assets/falda/MOD-0002.jpg";
 import falda2 from "../assets/falda/MOD-0078.jpg";
 import falda3 from "../assets/falda/MOD-0164.jpg";
@@ -62,14 +62,14 @@ import sueter15 from "../assets/sueter/MOD-0191.jpg";
 import sueter16 from "../assets/sueter/MOD.0118.jpg";
 import sueter17 from "../assets/sueter/mod.0185.jpg";
 // Bata photos
-import bata1 from "../assets/bata/MOD-0090.JPG";
+import bata1 from "../assets/bata/MOD-0090.jpg";
 // Sudadera photos
-import sudadera1 from "../assets/sudadera/MOD-0193.JPG";
+import sudadera1 from "../assets/sudadera/MOD-0193.jpg";
 // Mandil photos
-import mandil1 from "../assets/mandil/MOD-0065.JPG";
+import mandil1 from "../assets/mandil/MOD-0065.jpg";
 // Playera photos
-import playera1 from "../assets/playeras/MOD-0116.JPG";
-import playera2 from "../assets/playeras/MOD-0173.JPG";
+import playera1 from "../assets/playeras/MOD-0116.jpg";
+import playera2 from "../assets/playeras/MOD-0173.jpg";
 
 // const allFotos = [foto1, img1, foto3, foto4, foto5];
 const chamarraFotos = [
@@ -97,7 +97,17 @@ const chalecoFotos = [
 const pantalonFotos = [pantalon1, pantalon2];
 const shortsFotos = [shorts1, shorts2, shorts3];
 
-const pantsFotos = [pant1, pant2, pant3, pant4, pant5, pant6, pant7, pant8, pant9];
+const pantsFotos = [
+  pant1,
+  pant2,
+  pant3,
+  pant4,
+  pant5,
+  pant6,
+  pant7,
+  pant8,
+  pant9,
+];
 
 const sueterFotos = [
   sueter1,
@@ -125,7 +135,6 @@ const mandilFotos = [mandil1];
 const playeraFotos = [playera1, playera2];
 
 const faldaFotos = [falda1, falda2, falda3, falda4];
-
 
 const titles = [
   "Chamarras",
@@ -178,7 +187,6 @@ function getRandomImage(exclude, category = "general") {
       imagePool = playeraFotos;
       break;
     default:
-      imagePool = allFotos;
   }
   const filtered = imagePool.filter((img) => img !== exclude);
   return filtered[Math.floor(Math.random() * filtered.length)];
@@ -244,7 +252,6 @@ const getCardOverlayStyle = (idx) => {
     { primary: "#00bcd4", secondary: "#26c6da", accent: "#4dd0e1" }, // Shorts - Cyan
     { primary: "#f57c00", secondary: "#ff9800", accent: "#ffb74d" }, // Puños - Orange
     { primary: "#7b1fa2", secondary: "#8e24aa", accent: "#ab47bc" },
-    { primary: "#7b1fa2", secondary: "#8e24aa", accent: "#ab47bc" }, // Otros - Purple
     // Otros - Purple
   ];
 
@@ -343,7 +350,6 @@ const Productos = () => {
             { primary: "#00bcd4", secondary: "#26c6da", accent: "#4dd0e1" }, // Shorts - Cyan
             { primary: "#f57c00", secondary: "#ff9800", accent: "#ffb74d" }, // Puños - Orange
             { primary: "#7b1fa2", secondary: "#8e24aa", accent: "#ab47bc" },
-            { primary: "#7b1fa2", secondary: "#8e24aa", accent: "#ab47bc" }, // Otros - Purple
             // Otros - Purple
           ];
           const color = colors[idx] || colors[0];
