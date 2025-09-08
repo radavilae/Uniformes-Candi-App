@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import foto1 from "../assets/chamarra/MOD-0003.JPG";
+import foto1 from "../assets/chamarra/MOD-0003.jpg";
 import foto2 from "../assets/chamarra/MOD-004.jpg";
 import foto3 from "../assets/chamarra/MOD-0077.jpg";
 import foto4 from "../assets/chamarra/MOD-0088.jpg";
