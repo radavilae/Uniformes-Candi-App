@@ -15,7 +15,7 @@
   width: 100%;
   padding: 2rem 1rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: relative;
 }
@@ -68,7 +68,7 @@
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .nav-links li a {
@@ -149,6 +149,6 @@
   }
 
   .nav-links {
-    gap: 2.5rem;
+    gap: 3.5rem;
   }
 }

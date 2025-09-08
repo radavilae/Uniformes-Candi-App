@@ -3,18 +3,22 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import logo from "./assets/logo.jpg";
 import Navbar from "./components/Navbar";
-import EnConstruccion from "./components/EnConstruccion";
-import Carousel from "./components/Carousel";
 import Nosotros from "./pages/Nosotros";
 import Contacto from "./pages/Contacto";
-import Mosaico from "./components/Mosaico";
 import c40anos from "./assets/40años.jpeg";
 import Productos from "./pages/Productos";
 import Chamarra from "./pages/Chamarra";
 import Chaleco from "./pages/Chaleco";
-import Uniforme from "./pages/Uniforme";
-import Puno from "./pages/Puno";
-import Otro from "./pages/Otro";
+import Pantalon from "./pages/Pantalon";
+import Shorts from "./pages/Shorts";
+import Falda from "./pages/Falda"
+import Sueter from "./pages/Sueter";
+import Bata from "./pages/Bata";
+import Sudadera from "./pages/Sudadera";
+import Playera from "./pages/Playera";
+import Mandil from "./pages/Mandil";
+import Pants from "./pages/Pants";
+import Catalogo from "./pages/Catalogo";
 
 function App() {
   const [showNosotros, setShowNosotros] = useState(false);
@@ -55,6 +59,7 @@ function App() {
                   <img
                     src={c40anos}
                     alt="40 años"
+                    className={!showNosotros ? "blink-outline-pink" : ""}
                     style={{
                       width: "320px",
                       height: "320px",
@@ -93,22 +98,29 @@ function App() {
                       border: "none",
                       borderRadius: "0",
                       display: "block",
-                      margin: "0 auto"
+                      margin: "0 auto",
                     }}
                   />
                 </div>
               </header>
             }
           />
-          <Route path="/en-construccion" element={<EnConstruccion />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/contacto" element={<Contacto />} />
+          <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/productos" element={<Productos />} />
           <Route path="/productos/1" element={<Chamarra />} />
           <Route path="/productos/2" element={<Chaleco />} />
-          <Route path="/productos/3" element={<Uniforme />} />
-          <Route path="/productos/4" element={<Puno />} />
-          <Route path="/productos/5" element={<Otro />} />
+          <Route path="/productos/3" element={<Pantalon />} />
+          <Route path="/productos/4" element={<Shorts />} />
+          <Route path="/productos/6" element={<Pants />} />
+          <Route path="/productos/7" element={<Falda />} />
+          <Route path="/productos/8" element={<Sueter />} />
+          <Route path="/productos/9" element={<Bata />} />
+          <Route path="/productos/10" element={<Sudadera />} />
+          <Route path="/productos/11" element={<Playera />} />
+          <Route path="/productos/12" element={<Mandil />} />
+
         </Routes>
       </div>
     </Router>
