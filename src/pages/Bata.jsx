@@ -10,6 +10,7 @@ const gridStyle = {
   justifyItems: "center",
 };
 
+
 const imgStyle = {
   width: "100%",
   maxWidth: "340px",

@@ -60,7 +60,7 @@ import sueter13 from "../assets/sueter/MOD-0180.jpg";
 import sueter14 from "../assets/sueter/MOD-0183.jpg";
 import sueter15 from "../assets/sueter/MOD-0191.jpg";
 import sueter16 from "../assets/sueter/MOD-0118.jpg";
-import sueter17 from "../assets/sueter/mod-0185.jpg";
+import sueter17 from "../assets/sueter/MOD-0185.jpg";
 // Bata photos
 import bata1 from "../assets/bata/MOD-0090.jpg";
 // Sudadera photos
