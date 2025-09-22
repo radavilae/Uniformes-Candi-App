@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import img1 from "../assets/mandil/MOD-0065.JPG";
+import img1 from "../assets/mandil/MOD-0065.jpg";
 
 const gridStyle = {
   display: "grid",
