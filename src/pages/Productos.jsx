@@ -201,13 +201,19 @@ const gridStyle = {
   margin: "0 auto",
 };
 
+const pageStyle = {
+  background: "#f4eadf",
+  minHeight: "100vh",
+  paddingBottom: "40px",
+};
+
 const getCardStyle = (idx) => {
   return {
-    background: "#ffffff",
+    background: "#f4eadf",
     borderRadius: "24px",
     padding: "24px",
-    boxShadow: `0 4px 16px #db1c7c33`,
-    border: `2px solid #db1c7c88`,
+    boxShadow: "none",
+    border: "none",
     transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
     cursor: "pointer",
     position: "relative",
@@ -321,7 +327,7 @@ const Productos = () => {
   };
 
   return (
-    <div>
+    <div style={pageStyle}>
       <h1
         style={{
           textAlign: "center",
@@ -361,7 +367,6 @@ const Productos = () => {
               onMouseOver={(e) => {
                 e.currentTarget.style.transform =
                   "translateY(-8px) scale(1.02)";
-                e.currentTarget.style.boxShadow = `0 12px 36px #db1c7c55`;
                 e.currentTarget.querySelector(".card-overlay").style.opacity =
                   "1";
                 e.currentTarget.querySelector("img").style.transform =
@@ -369,7 +374,6 @@ const Productos = () => {
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = "translateY(0) scale(1)";
-                e.currentTarget.style.boxShadow = `0 4px 16px #db1c7c33`;
                 e.currentTarget.querySelector(".card-overlay").style.opacity =
                   "0";
                 e.currentTarget.querySelector("img").style.transform =
