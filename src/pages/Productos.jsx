@@ -228,7 +228,7 @@ const imgStyle = {
   height: "280px",
   objectFit: "cover",
   borderRadius: "16px",
-  boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+  boxShadow: "none",
   transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
   position: "relative",
   zIndex: 2,
@@ -245,7 +245,7 @@ const getTitleStyle = (idx) => {
     textTransform: "uppercase",
     position: "relative",
     zIndex: 2,
-    textShadow: "0 1px 2px rgba(219,28,124,0.15)",
+    textShadow: "none",
   };
 };
 
