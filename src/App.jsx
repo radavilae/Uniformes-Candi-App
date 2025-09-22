@@ -5,7 +5,7 @@ import logo from "./assets/logo.jpg";
 import Navbar from "./components/Navbar";
 import Nosotros from "./pages/Nosotros";
 import Contacto from "./pages/Contacto";
-import c40anos from "./assets/40años.jpeg";
+import c40anos from "./assets/40candi.jpeg";
 import Productos from "./pages/Productos";
 import Chamarra from "./pages/Chamarra";
 import Chaleco from "./pages/Chaleco";

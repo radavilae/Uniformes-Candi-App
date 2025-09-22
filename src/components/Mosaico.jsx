@@ -4,7 +4,7 @@
 // import foto3 from "../assets/foto3.jpg";
 // import foto4 from "../assets/foto4.jpg";
 // import foto5 from "../assets/foto5.jpg";
-// import c40anos from "../assets/40años.jpeg";
+// import c40anos from "../assets/40candi.jpeg";
 
 // const allImages = [foto1, foto2, foto3, foto4, foto5];
 
