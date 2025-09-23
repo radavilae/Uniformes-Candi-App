@@ -4,10 +4,14 @@ import img1 from "../assets/bata/MOD-0090.jpg";
 
 const gridStyle = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-  gap: "32px",
-  padding: "40px 0",
-  justifyItems: "center",
+  gridTemplateColumns: "repeat(3, minmax(260px, 340px))",
+  gap: "80px",
+  padding: "40px 60px",
+  width: "100%",
+  maxWidth: "1400px",
+  margin: "0 auto",
+  justifyContent: "space-between",
+  alignItems: "start",
 };
 
 
@@ -17,7 +21,32 @@ const imgStyle = {
   height: "340px",
   objectFit: "cover",
   borderRadius: "18px",
-  boxShadow: "0 4px 24px rgba(219,28,124,0.20)",
+  boxShadow: "none",
+  transition: "transform 0.2s ease",
+};
+
+const pageStyle = {
+  background: "#ffffff",
+  minHeight: "100vh",
+  paddingBottom: "24px",
+};
+
+const imageCardStyle = {
+  position: "relative",
+  width: "100%",
+  maxWidth: "340px",
+  borderRadius: "18px",
+  overflow: "hidden",
+};
+
+const hoverCaptionStyle = {
+  marginTop: "8px",
+  textAlign: "center",
+  color: "#333",
+  fontWeight: 600,
+  lineHeight: 1.4,
+  opacity: 0,
+  transition: "opacity 0.2s ease",
 };
 
 const arrowStyle = {
@@ -34,7 +63,7 @@ const arrowStyle = {
 const Bata = () => {
   const navigate = useNavigate();
   return (
-    <div>
+    <div style={pageStyle}>
       <button
         style={arrowStyle}
         onClick={() => navigate("/productos")}
@@ -42,18 +71,26 @@ const Bata = () => {
       >
         ←
       </button>
-      <h1
-        style={{
-          textAlign: "center",
-          margin: "32px 0 16px 0",
-          color: "#db1c7c",
-          fontWeight: 700,
-        }}
-      >
-        Bata
-      </h1>
+      {/* Title removed as requested */}
       <div style={gridStyle}>
-        <img src={img1} alt="Bata 1" style={imgStyle} />
+        <div
+          style={{ ...imageCardStyle, gridColumn: '2 / span 1' }}
+          onMouseOver={(e) => {
+            const imageEl = e.currentTarget.querySelector('img');
+            const captionEl = e.currentTarget.querySelector('.hover-caption');
+            if (imageEl) imageEl.style.transform = 'scale(1.05)';
+            if (captionEl) captionEl.style.opacity = 1;
+          }}
+          onMouseOut={(e) => {
+            const imageEl = e.currentTarget.querySelector('img');
+            const captionEl = e.currentTarget.querySelector('.hover-caption');
+            if (imageEl) imageEl.style.transform = 'scale(1)';
+            if (captionEl) captionEl.style.opacity = 0;
+          }}
+        >
+          <img src={img1} alt="Bata 1" style={imgStyle} />
+          <div className="hover-caption" style={hoverCaptionStyle}>Bata profesional resistente</div>
+        </div>
       </div>
     </div>
   );

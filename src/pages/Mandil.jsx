@@ -16,7 +16,32 @@ const imgStyle = {
   height: "340px",
   objectFit: "cover",
   borderRadius: "18px",
-  boxShadow: "0 4px 24px rgba(219,28,124,0.20)",
+  boxShadow: "none",
+  transition: "transform 0.2s ease",
+};
+
+const pageStyle = {
+  background: "#ffffff",
+  minHeight: "100vh",
+  paddingBottom: "24px",
+};
+
+const imageCardStyle = {
+  position: "relative",
+  width: "100%",
+  maxWidth: "340px",
+  borderRadius: "18px",
+  overflow: "hidden",
+};
+
+const hoverCaptionStyle = {
+  marginTop: "8px",
+  textAlign: "center",
+  color: "#333",
+  fontWeight: 600,
+  lineHeight: 1.4,
+  opacity: 0,
+  transition: "opacity 0.2s ease",
 };
 
 const arrowStyle = {
@@ -33,16 +58,37 @@ const arrowStyle = {
 const Mandil = () => {
   const navigate = useNavigate();
   return (
-    <div>
-      <button style={arrowStyle} onClick={() => navigate('/productos')} aria-label="Volver a productos">←</button>
-      <h1 style={{ textAlign: "center", margin: "32px 0 16px 0", color: "#db1c7c", fontWeight: 700 }}>Mandil</h1>
+    <div style={pageStyle}>
+      <button
+        style={arrowStyle}
+        onClick={() => navigate("/productos")}
+        aria-label="Volver a productos"
+      >
+        ←
+      </button>
+      {/* Title removed as requested */}
       <div style={gridStyle}>
-        <img src={img1} alt="Mandil 1" style={imgStyle} />
+        <div
+          style={imageCardStyle}
+          onMouseOver={(e) => {
+            const imageEl = e.currentTarget.querySelector('img');
+            const captionEl = e.currentTarget.querySelector('.hover-caption');
+            if (imageEl) imageEl.style.transform = 'scale(1.05)';
+            if (captionEl) captionEl.style.opacity = 1;
+          }}
+          onMouseOut={(e) => {
+            const imageEl = e.currentTarget.querySelector('img');
+            const captionEl = e.currentTarget.querySelector('.hover-caption');
+            if (imageEl) imageEl.style.transform = 'scale(1)';
+            if (captionEl) captionEl.style.opacity = 0;
+          }}
+        >
+          <img src={img1} alt="Mandil 1" style={imgStyle} />
+          <div className="hover-caption" style={hoverCaptionStyle}>Mandil resistente para uso intensivo</div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Mandil;
-
-

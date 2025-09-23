@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.jpg";
 
 // Chamarra photos
 import chamarra1 from "../assets/chamarra/MOD-0003.jpg";
@@ -143,9 +144,9 @@ const titles = [
   "Faldas",
   "Pants",
   "Suéter",
-  "Bata",
-  "Sudadera",
   "Mandil",
+  "Sudadera",
+  "Bata",
   "Playera",
 ];
 
@@ -199,17 +200,42 @@ const gridStyle = {
   justifyItems: "center",
   maxWidth: "1400px",
   margin: "0 auto",
+  position: "relative",
+  zIndex: 1,
 };
 
 const pageStyle = {
-  background: "#f4eadf",
+  background: "#ffffff",
   minHeight: "100vh",
   paddingBottom: "40px",
+  position: "relative",
+  overflow: "hidden",
+};
+
+const watermarkWrapperStyle = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  pointerEvents: "none",
+  zIndex: 0,
+};
+
+const watermarkImageStyle = {
+  width: "60vw",
+  maxWidth: "800px",
+  minWidth: "360px",
+  opacity: 0.09,
+  filter: "grayscale(10%) drop-shadow(0 0 2px rgba(0,0,0,0.18)) drop-shadow(0 0 6px rgba(0,0,0,0.08))",
 };
 
 const getCardStyle = (idx) => {
   return {
-    background: "#f4eadf",
+    background: "transparent",
     borderRadius: "24px",
     padding: "24px",
     boxShadow: "none",
@@ -238,7 +264,7 @@ const getTitleStyle = (idx) => {
   return {
     textAlign: "center",
     marginTop: "20px",
-    color: "#db1c7c",
+    color: "#000000",
     fontWeight: 700,
     fontSize: "1.2rem",
     letterSpacing: "1.5px",
@@ -277,75 +303,33 @@ const getCardOverlayStyle = (idx) => {
 };
 
 const Productos = () => {
-  const [imgs, setImgs] = useState([
-    getRandomImage(undefined, "chamarra"),
-    getRandomImage(undefined, "chaleco"),
-    getRandomImage(undefined, "pantalon"),
-    getRandomImage(undefined, "shorts"),
-    getRandomImage(undefined, "falda"),
-    getRandomImage(undefined, "pants"),
-    getRandomImage(undefined, "sueter"),
-    getRandomImage(undefined, "bata"),
-    getRandomImage(undefined, "sudadera"),
-    getRandomImage(undefined, "mandil"),
-    getRandomImage(undefined, "playera"),
+  const [imgs] = useState([
+    chamarra1,
+    chaleco1,
+    pantalon1,
+    shorts1,
+    falda1,
+    pant1,
+    sueter1,
+    mandil1,
+    sudadera1,
+    bata1,
+    playera1,
   ]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const intervals = imgs.map((img, idx) => {
-      // Keep Bata (7), Sudadera (8), Mandil (9) static with a single photo
-      if (idx === 7 || idx === 8 || idx === 9) return null;
-      return setInterval(() => {
-        setImgs((prev) => {
-          const newImgs = [...prev];
-          let category = "general";
-          if (idx === 0) category = "chamarra"; // Chamarras
-          if (idx === 1) category = "chaleco"; // Chalecos
-          if (idx === 2) category = "pantalon"; // Pantalón
-          if (idx === 3) category = "shorts"; // Shorts
-          if (idx === 4) category = "falda"; // Falda
-          if (idx === 5) category = "pants"; // Pants
-          if (idx === 6) category = "sueter"; // Suéter
-          if (idx === 7) category = "bata"; // Bata
-          if (idx === 8) category = "sudadera"; // Sudadera
-          if (idx === 9) category = "mandil"; // Mandil
-          if (idx === 10) category = "playera"; // Playera
-          newImgs[idx] = getRandomImage(prev[idx], category);
-          return newImgs;
-        });
-      }, 2000 + idx * 1200);
-    });
-    return () => intervals.forEach((i) => i && clearInterval(i));
-    // eslint-disable-next-line
-  }, []);
-
   const handleClick = (idx) => {
-    const routeMapping = [1, 2, 3, 4, 7, 6, 8, 9, 10, 12, 11];
+    const routeMapping = [1, 2, 3, 4, 7, 6, 8, 12, 10, 9, 11];
     const routeIndex = routeMapping[idx] || idx + 1;
     navigate(`/productos/${routeIndex}`);
   };
 
   return (
     <div style={pageStyle}>
-      <h1
-        style={{
-          textAlign: "center",
-          margin: "40px 0 20px 0",
-          background:
-            "linear-gradient(135deg, #db1c7c 0%, #e91e63 50%, #f06292 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-          fontWeight: 800,
-          fontSize: "2.5rem",
-          letterSpacing: "2px",
-          textTransform: "uppercase",
-          textShadow: "0 4px 8px rgba(219,28,124,0.1)",
-        }}
-      >
-        Nuestros Productos
-      </h1>
+      <div style={watermarkWrapperStyle}>
+        <img src={logo} alt="Candi watermark" style={watermarkImageStyle} />
+      </div>
+      {/** Title removed as requested */}
       <div style={gridStyle}>
         {imgs.map((foto, idx) => {
           const colors = [
@@ -366,24 +350,17 @@ const Productos = () => {
               onClick={() => handleClick(idx)}
               onMouseOver={(e) => {
                 e.currentTarget.style.transform =
-                  "translateY(-8px) scale(1.02)";
-                e.currentTarget.querySelector(".card-overlay").style.opacity =
-                  "1";
+                  "translateY(-2px) scale(1.01)";
                 e.currentTarget.querySelector("img").style.transform =
-                  "scale(1.05)";
+                  "scale(1.02)";
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = "translateY(0) scale(1)";
-                e.currentTarget.querySelector(".card-overlay").style.opacity =
-                  "0";
                 e.currentTarget.querySelector("img").style.transform =
                   "scale(1)";
               }}
             >
-              <div
-                className="card-overlay"
-                style={getCardOverlayStyle(idx)}
-              ></div>
+              {/* overlay removed to avoid color change on hover */}
               <img src={foto} alt={titles[idx]} style={imgStyle} />
               <div style={getTitleStyle(idx)}>{titles[idx]}</div>
             </div>

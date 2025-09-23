@@ -21,10 +21,14 @@ import img17 from "../assets/sueter/MOD-0185.jpg";
 
 const gridStyle = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-  gap: "32px",
-  padding: "40px 0",
-  justifyItems: "center",
+  gridTemplateColumns: "repeat(3, minmax(260px, 340px))",
+  gap: "48px",
+  padding: "40px 20px",
+  width: "100%",
+  maxWidth: "1400px",
+  margin: "0 auto",
+  justifyContent: "space-between",
+  alignItems: "start",
 };
 
 const imgStyle = {
@@ -33,9 +37,27 @@ const imgStyle = {
   height: "340px",
   objectFit: "cover",
   borderRadius: "18px",
-  boxShadow: "0 4px 24px rgba(219,28,124,0.10)",
+  boxShadow: "none",
   cursor: "pointer",
   transition: "transform 0.2s, box-shadow 0.2s",
+};
+
+const imageCardStyle = {
+  position: "relative",
+  width: "100%",
+  maxWidth: "340px",
+  borderRadius: "18px",
+  overflow: "hidden",
+};
+
+const hoverCaptionStyle = {
+  marginTop: "8px",
+  textAlign: "center",
+  color: "#333",
+  fontWeight: 600,
+  lineHeight: 1.4,
+  opacity: 0,
+  transition: "opacity 0.2s ease",
 };
 
 const modalOverlayStyle = {
@@ -154,17 +176,30 @@ const Sueter = () => {
       </h1>
       <div style={gridStyle}>
         {sueterImages.map((img, idx) => (
-          <img
+          <div
             key={idx}
-            src={img}
-            alt={`Suéter ${idx + 1}`}
-            style={imgStyle}
+            style={imageCardStyle}
             onClick={() => handleImageClick(img, idx)}
-            onMouseOver={(e) =>
-              (e.currentTarget.style.transform = "scale(1.05)")
-            }
-            onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
-          />
+            onMouseOver={(e) => {
+              const imageEl = e.currentTarget.querySelector('img');
+              const captionEl = e.currentTarget.querySelector('.hover-caption');
+              if (imageEl) imageEl.style.transform = 'scale(1.05)';
+              if (captionEl) captionEl.style.opacity = 1;
+            }}
+            onMouseOut={(e) => {
+              const imageEl = e.currentTarget.querySelector('img');
+              const captionEl = e.currentTarget.querySelector('.hover-caption');
+              if (imageEl) imageEl.style.transform = 'scale(1)';
+              if (captionEl) captionEl.style.opacity = 0;
+            }}
+          >
+            <img
+              src={img}
+              alt={`Suéter ${idx + 1}`}
+              style={imgStyle}
+            />
+            <div className="hover-caption" style={hoverCaptionStyle}>{`Modelo Suéter ${idx + 1}`}</div>
+          </div>
         ))}
       </div>
 

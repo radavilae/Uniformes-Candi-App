@@ -9,10 +9,14 @@ import img6 from "../assets/chaleco/MOD-0178.jpg";
 
 const gridStyle = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-  gap: "32px",
-  padding: "40px 0",
-  justifyItems: "center",
+  gridTemplateColumns: "repeat(3, minmax(260px, 340px))",
+  gap: "80px",
+  padding: "40px 60px",
+  width: "100%",
+  maxWidth: "1400px",
+  margin: "0 auto",
+  justifyContent: "space-between",
+  alignItems: "start",
 };
 
 const imgStyle = {
@@ -21,9 +25,9 @@ const imgStyle = {
   height: "340px",
   objectFit: "cover",
   borderRadius: "18px",
-  boxShadow: "0 4px 24px rgba(219,28,124,0.10)",
+  boxShadow: "none",
   cursor: "pointer",
-  transition: "transform 0.2s, box-shadow 0.2s",
+  transition: "transform 0.2s ease",
 };
 
 const modalOverlayStyle = {
@@ -91,6 +95,29 @@ const arrowStyle = {
 
 const chalecoImages = [img1, img2, img3, img4, img5, img6];
 
+const pageStyle = {
+  background: "#ffffff",
+  minHeight: "100vh",
+  paddingBottom: "24px",
+};
+
+const imageCardStyle = {
+  position: "relative",
+  width: "100%",
+  maxWidth: "340px",
+  borderRadius: "18px",
+  overflow: "hidden",
+};
+
+const hoverCaptionStyle = {
+  marginTop: "8px",
+  textAlign: "center",
+  color: "#333",
+  fontWeight: 600,
+  lineHeight: 1.4,
+  opacity: 0,
+  transition: "opacity 0.2s ease",
+};
 const Chaleco = () => {
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState(null);
@@ -119,7 +146,7 @@ const Chaleco = () => {
   };
 
   return (
-    <div>
+    <div style={pageStyle}>
       <button
         style={arrowStyle}
         onClick={() => navigate("/productos")}
@@ -127,29 +154,33 @@ const Chaleco = () => {
       >
         ←
       </button>
-      <h1
-        style={{
-          textAlign: "center",
-          margin: "32px 0 16px 0",
-          color: "#db1c7c",
-          fontWeight: 700,
-        }}
-      >
-        Chalecos
-      </h1>
+      {/* Title removed as requested */}
       <div style={gridStyle}>
         {chalecoImages.map((img, idx) => (
-          <img
+          <div
             key={idx}
-            src={img}
-            alt={`Chaleco ${idx + 1}`}
-            style={imgStyle}
+            style={imageCardStyle}
             onClick={() => handleImageClick(img, idx)}
-            onMouseOver={(e) =>
-              (e.currentTarget.style.transform = "scale(1.05)")
-            }
-            onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
-          />
+            onMouseOver={(e) => {
+              const imageEl = e.currentTarget.querySelector('img');
+              const captionEl = e.currentTarget.querySelector('.hover-caption');
+              if (imageEl) imageEl.style.transform = 'scale(1.05)';
+              if (captionEl) captionEl.style.opacity = 1;
+            }}
+            onMouseOut={(e) => {
+              const imageEl = e.currentTarget.querySelector('img');
+              const captionEl = e.currentTarget.querySelector('.hover-caption');
+              if (imageEl) imageEl.style.transform = 'scale(1)';
+              if (captionEl) captionEl.style.opacity = 0;
+            }}
+          >
+            <img
+              src={img}
+              alt={`Chaleco ${idx + 1}`}
+              style={imgStyle}
+            />
+            <div className="hover-caption" style={hoverCaptionStyle}>{getImageInfo(idx)}</div>
+          </div>
         ))}
       </div>
 
