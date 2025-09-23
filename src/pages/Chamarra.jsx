@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import foto1 from "../assets/chamarra/MOD-0003.jpg";
 import foto2 from "../assets/chamarra/MOD-004.jpg";
 import foto3 from "../assets/chamarra/MOD-0077.jpg";
@@ -77,6 +77,66 @@ const modalTextStyle = {
   lineHeight: "1.6",
 };
 
+
+const deepZoomOverlayStyle = {
+  position: "fixed",
+  inset: 0,
+  background: "rgba(0,0,0,0.9)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: 3000,
+  padding: 0,
+};
+
+const deepZoomImgBaseStyle = {
+  maxWidth: "98vw",
+  maxHeight: "98vh",
+  objectFit: "contain",
+  borderRadius: "12px",
+  transition: "transform 0.15s ease",
+};
+
+const deepZoomCloseStyle = {
+  position: "absolute",
+  top: "14px",
+  right: "16px",
+  background: "#ffffff",
+  border: "none",
+  borderRadius: "8px",
+  padding: "8px 12px",
+  cursor: "pointer",
+  fontSize: "1rem",
+};
+
+const openInNewTabBtnStyle = {
+  position: "absolute",
+  top: "14px",
+  left: "16px",
+  padding: "6px 10px",
+  borderRadius: "8px",
+  border: "1px solid #e0e0e0",
+  background: "#ffffff",
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "16px",
+};
+
+const squareIconStyle = {
+  width: "18px",
+  height: "18px",
+  border: "1px solid #999",
+  borderRadius: "4px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "12px",
+  lineHeight: 1,
+  color: "#333",
+};
+
 const closeButtonStyle = {
   position: "absolute",
   top: "15px",
@@ -129,6 +189,16 @@ const hoverCaptionStyle = {
 const Chamarra = () => {
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isEnlarged, setIsEnlarged] = useState(false);
+  const [transformOrigin, setTransformOrigin] = useState("center center");
+  const [showDeepZoom, setShowDeepZoom] = useState(false);
+  const [deepZoomScale, setDeepZoomScale] = useState(3.0);
+  // Drag to pan when zoomed in
+  const [isDragging, setIsDragging] = useState(false);
+  const [lastPos, setLastPos] = useState({ x: 0, y: 0 });
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [mouseDownInfo, setMouseDownInfo] = useState({ x: 0, y: 0, t: 0 });
+  // Drag/offset disabled to keep image fixed while magnifying
 
   const handleImageClick = (img, idx) => {
     setSelectedImage({ img, idx });
@@ -136,7 +206,28 @@ const Chamarra = () => {
 
   const handleCloseModal = () => {
     setSelectedImage(null);
+    setIsEnlarged(false);
+    setShowDeepZoom(false);
+    setDeepZoomScale(1.8);
+    setOffset({ x: 0, y: 0 });
   };
+
+  const handleWheelZoom = (e) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -0.35 : 0.35;
+    setDeepZoomScale((s) => Math.max(1, Math.min(8, s + delta)));
+  };
+
+  // Prevent background scroll when deep zoom open
+  useEffect(() => {
+    if (showDeepZoom) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [showDeepZoom]);
 
   const getImageInfo = (idx) => {
     const info = [
@@ -193,10 +284,25 @@ const Chamarra = () => {
         <div style={modalOverlayStyle} onClick={handleCloseModal}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
             <button style={closeButtonStyle} onClick={handleCloseModal} aria-label="Cerrar">×</button>
+            <button
+              style={openInNewTabBtnStyle}
+              onClick={() => window.open(selectedImage.img, '_blank', 'noopener,noreferrer')}
+              aria-label="Abrir en nueva pestaña"
+              title="Abrir en nueva pestaña"
+            >
+              <span style={squareIconStyle}>↗</span>
+            </button>
             <img 
               src={selectedImage.img} 
               alt={`Chamarra ${selectedImage.idx + 1}`} 
-              style={modalImageStyle}
+              style={{
+                ...modalImageStyle,
+                cursor: isEnlarged ? "zoom-out" : "zoom-in",
+                transform: isEnlarged ? "scale(2.0)" : "scale(1)",
+                transformOrigin: 'center center',
+                transition: "transform 0.2s ease, transform-origin 0.1s ease",
+              }}
+              onClick={() => setIsEnlarged((v) => !v)}
             />
             <div style={modalTextStyle}>
               <h3 style={{ color: "#db1c7c", marginBottom: "10px" }}>
@@ -205,6 +311,52 @@ const Chamarra = () => {
               <p>{getImageInfo(selectedImage.idx)}</p>
             </div>
           </div>
+        </div>
+      )}
+
+      {showDeepZoom && selectedImage && (
+        <div style={deepZoomOverlayStyle} onClick={() => setShowDeepZoom(false)}>
+          <button style={deepZoomCloseStyle} onClick={() => setShowDeepZoom(false)} aria-label="Cerrar ampliación">Cerrar</button>
+          <img
+            src={selectedImage.img}
+            alt={`Chamarra ${selectedImage.idx + 1} ampliada`}
+            style={{
+              ...deepZoomImgBaseStyle,
+              transform: deepZoomScale > 1 ? `translate(${offset.x}px, ${offset.y}px) scale(${deepZoomScale})` : `scale(${deepZoomScale})`,
+              cursor: deepZoomScale > 1 ? (isDragging ? "grabbing" : "grab") : "zoom-in",
+            }}
+            onWheel={handleWheelZoom}
+            onMouseDown={(e) => {
+              if (deepZoomScale <= 1) return;
+              e.preventDefault();
+              setIsDragging(true);
+              setLastPos({ x: e.clientX, y: e.clientY });
+              setMouseDownInfo({ x: e.clientX, y: e.clientY, t: Date.now() });
+            }}
+            onMouseMove={(e) => {
+              if (!isDragging) return;
+              const dx = e.clientX - lastPos.x;
+              const dy = e.clientY - lastPos.y;
+              setLastPos({ x: e.clientX, y: e.clientY });
+              setOffset((o) => ({ x: o.x + dx, y: o.y + dy }));
+            }}
+            onMouseUp={(e) => {
+              const dt = Date.now() - mouseDownInfo.t;
+              const dist = Math.hypot(e.clientX - mouseDownInfo.x, e.clientY - mouseDownInfo.y);
+              setIsDragging(false);
+              e.stopPropagation();
+              // If it was a click (not a drag), toggle zoom
+              if (dt < 250 && dist < 5) {
+                if (deepZoomScale > 1) {
+                  setDeepZoomScale(1);
+                  setOffset({ x: 0, y: 0 });
+                } else {
+                  setDeepZoomScale(4.0);
+                }
+              }
+            }}
+            onMouseLeave={() => setIsDragging(false)}
+          />
         </div>
       )}
     </div>

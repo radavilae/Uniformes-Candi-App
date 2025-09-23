@@ -83,7 +83,7 @@ const badgeStyle = {
 };
 
 const tooltipStyle = {
-  color: "#e98bb7",
+  color: "#000000",
   fontWeight: 400,
   opacity: 0,
   transition: "opacity 0.2s ease",

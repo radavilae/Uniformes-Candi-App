@@ -6,7 +6,6 @@ import img2 from "../assets/sueter/MOD-0013.jpg";
 import img3 from "../assets/sueter/MOD-0025.jpg";
 import img4 from "../assets/sueter/MOD-0034.jpg";
 import img5 from "../assets/sueter/MOD-0047.jpg";
-import img6 from "../assets/sueter/MOD-0050.jpg";
 import img7 from "../assets/sueter/MOD-0057.jpg";
 import img8 from "../assets/sueter/MOD-0082.jpg";
 import img9 from "../assets/sueter/MOD-0095.jpg";
@@ -129,7 +128,6 @@ const sueterImages = [
   img3,
   img4,
   img5,
-  img6,
   img7,
   img8,
   img9,
@@ -164,16 +162,7 @@ const Sueter = () => {
       >
         ←
       </button>
-      <h1
-        style={{
-          textAlign: "center",
-          margin: "32px 0 16px 0",
-          color: "#db1c7c",
-          fontWeight: 700,
-        }}
-      >
-        Suéter
-      </h1>
+      {/* Title removed as requested */}
       <div style={gridStyle}>
         {sueterImages.map((img, idx) => (
           <div
