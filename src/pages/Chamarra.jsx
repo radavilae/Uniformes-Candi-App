@@ -77,7 +77,6 @@ const modalTextStyle = {
   lineHeight: "1.6",
 };
 
-
 const deepZoomOverlayStyle = {
   position: "fixed",
   inset: 0,
@@ -157,10 +156,23 @@ const arrowStyle = {
   cursor: "pointer",
   margin: "24px 0 0 12px",
   display: "flex",
-  alignItems: "center"
+  alignItems: "center",
 };
 
-const chamarraImages = [foto1, foto2, foto3, foto4, foto5, foto6, foto7, foto8, foto9, foto10, foto11, foto12];
+const chamarraImages = [
+  foto1,
+  foto2,
+  foto3,
+  foto4,
+  foto5,
+  foto6,
+  foto7,
+  foto8,
+  foto9,
+  foto10,
+  foto11,
+  foto12,
+];
 
 const pageStyle = {
   background: "#ffffff",
@@ -231,7 +243,7 @@ const Chamarra = () => {
 
   const getImageInfo = (idx) => {
     const info = [
-      "Chamarra elegante con diseño moderno y corte clásico. Perfecta para ocasiones formales.",
+      "MOD.003\nChamarra con forro y cuello alto, manga ranglan de dos piezas, corte en pecho y espalda con bies con piola en contraste. Jareta en parte inferior, Bordado en delantero izquierdo y centro espalda.",
       "Chamarra deportiva con tecnología de última generación. Ideal para actividades al aire libre.",
       "Chamarra casual con estilo urbano. Cómoda y versátil para el día a día.",
       "Chamarra de trabajo resistente y duradera. Diseñada para profesionales exigentes.",
@@ -242,14 +254,20 @@ const Chamarra = () => {
       "Chamarra premium con acabados de lujo. Para quienes buscan la máxima calidad.",
       "Chamarra técnica con características especiales. Diseñada para necesidades específicas.",
       "Chamarra con estilo contemporáneo y materiales sostenibles. Moda consciente y elegante.",
-      "Chamarra exclusiva con diseño único. Para personalidades que buscan destacar."
+      "Chamarra exclusiva con diseño único. Para personalidades que buscan destacar.",
     ];
     return info[idx] || "Chamarra de alta calidad con diseño exclusivo.";
   };
 
   return (
     <div style={pageStyle}>
-      <button style={arrowStyle} onClick={() => navigate('/productos')} aria-label="Volver a productos">←</button>
+      <button
+        style={arrowStyle}
+        onClick={() => navigate("/productos")}
+        aria-label="Volver a productos"
+      >
+        ←
+      </button>
       {/* Title removed as requested */}
       <div style={gridStyle}>
         {chamarraImages.map((img, idx) => (
@@ -258,24 +276,22 @@ const Chamarra = () => {
             style={imageCardStyle}
             onClick={() => handleImageClick(img, idx)}
             onMouseOver={(e) => {
-              const imageEl = e.currentTarget.querySelector('img');
-              const captionEl = e.currentTarget.querySelector('.hover-caption');
-              if (imageEl) imageEl.style.transform = 'scale(1.05)';
+              const imageEl = e.currentTarget.querySelector("img");
+              const captionEl = e.currentTarget.querySelector(".hover-caption");
+              if (imageEl) imageEl.style.transform = "scale(1.05)";
               if (captionEl) captionEl.style.opacity = 1;
             }}
             onMouseOut={(e) => {
-              const imageEl = e.currentTarget.querySelector('img');
-              const captionEl = e.currentTarget.querySelector('.hover-caption');
-              if (imageEl) imageEl.style.transform = 'scale(1)';
+              const imageEl = e.currentTarget.querySelector("img");
+              const captionEl = e.currentTarget.querySelector(".hover-caption");
+              if (imageEl) imageEl.style.transform = "scale(1)";
               if (captionEl) captionEl.style.opacity = 0;
             }}
           >
-            <img
-              src={img}
-              alt={`Chamarra ${idx + 1}`}
-              style={imgStyle}
-            />
-            <div className="hover-caption" style={hoverCaptionStyle}>{getImageInfo(idx)}</div>
+            <img src={img} alt={`Chamarra ${idx + 1}`} style={imgStyle} />
+            <div className="hover-caption" style={hoverCaptionStyle}>
+              {getImageInfo(idx)}
+            </div>
           </div>
         ))}
       </div>
@@ -283,23 +299,31 @@ const Chamarra = () => {
       {selectedImage && (
         <div style={modalOverlayStyle} onClick={handleCloseModal}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
-            <button style={closeButtonStyle} onClick={handleCloseModal} aria-label="Cerrar">×</button>
+            <button
+              style={closeButtonStyle}
+              onClick={handleCloseModal}
+              aria-label="Cerrar"
+            >
+              ×
+            </button>
             <button
               style={openInNewTabBtnStyle}
-              onClick={() => window.open(selectedImage.img, '_blank', 'noopener,noreferrer')}
+              onClick={() =>
+                window.open(selectedImage.img, "_blank", "noopener,noreferrer")
+              }
               aria-label="Abrir en nueva pestaña"
               title="Abrir en nueva pestaña"
             >
               <span style={squareIconStyle}>↗</span>
             </button>
-            <img 
-              src={selectedImage.img} 
-              alt={`Chamarra ${selectedImage.idx + 1}`} 
+            <img
+              src={selectedImage.img}
+              alt={`Chamarra ${selectedImage.idx + 1}`}
               style={{
                 ...modalImageStyle,
                 cursor: isEnlarged ? "zoom-out" : "zoom-in",
                 transform: isEnlarged ? "scale(2.0)" : "scale(1)",
-                transformOrigin: 'center center',
+                transformOrigin: "center center",
                 transition: "transform 0.2s ease, transform-origin 0.1s ease",
               }}
               onClick={() => setIsEnlarged((v) => !v)}
@@ -315,15 +339,32 @@ const Chamarra = () => {
       )}
 
       {showDeepZoom && selectedImage && (
-        <div style={deepZoomOverlayStyle} onClick={() => setShowDeepZoom(false)}>
-          <button style={deepZoomCloseStyle} onClick={() => setShowDeepZoom(false)} aria-label="Cerrar ampliación">Cerrar</button>
+        <div
+          style={deepZoomOverlayStyle}
+          onClick={() => setShowDeepZoom(false)}
+        >
+          <button
+            style={deepZoomCloseStyle}
+            onClick={() => setShowDeepZoom(false)}
+            aria-label="Cerrar ampliación"
+          >
+            Cerrar
+          </button>
           <img
             src={selectedImage.img}
             alt={`Chamarra ${selectedImage.idx + 1} ampliada`}
             style={{
               ...deepZoomImgBaseStyle,
-              transform: deepZoomScale > 1 ? `translate(${offset.x}px, ${offset.y}px) scale(${deepZoomScale})` : `scale(${deepZoomScale})`,
-              cursor: deepZoomScale > 1 ? (isDragging ? "grabbing" : "grab") : "zoom-in",
+              transform:
+                deepZoomScale > 1
+                  ? `translate(${offset.x}px, ${offset.y}px) scale(${deepZoomScale})`
+                  : `scale(${deepZoomScale})`,
+              cursor:
+                deepZoomScale > 1
+                  ? isDragging
+                    ? "grabbing"
+                    : "grab"
+                  : "zoom-in",
             }}
             onWheel={handleWheelZoom}
             onMouseDown={(e) => {
@@ -342,7 +383,10 @@ const Chamarra = () => {
             }}
             onMouseUp={(e) => {
               const dt = Date.now() - mouseDownInfo.t;
-              const dist = Math.hypot(e.clientX - mouseDownInfo.x, e.clientY - mouseDownInfo.y);
+              const dist = Math.hypot(
+                e.clientX - mouseDownInfo.x,
+                e.clientY - mouseDownInfo.y
+              );
               setIsDragging(false);
               e.stopPropagation();
               // If it was a click (not a drag), toggle zoom
@@ -363,4 +407,4 @@ const Chamarra = () => {
   );
 };
 
-export default Chamarra; 
+export default Chamarra;

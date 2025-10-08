@@ -128,27 +128,42 @@ const Shorts = () => {
         {shortsImages.map((img, idx) => (
           <div
             key={idx}
-            style={{ position: 'relative', width: '100%', maxWidth: '340px', borderRadius: '18px', overflow: 'hidden' }}
+            style={{
+              position: "relative",
+              width: "100%",
+              maxWidth: "340px",
+              borderRadius: "18px",
+              overflow: "hidden",
+            }}
             onClick={() => handleImageClick(img, idx)}
             onMouseOver={(e) => {
-              const imageEl = e.currentTarget.querySelector('img');
-              const captionEl = e.currentTarget.querySelector('.hover-caption');
-              if (imageEl) imageEl.style.transform = 'scale(1.05)';
+              const imageEl = e.currentTarget.querySelector("img");
+              const captionEl = e.currentTarget.querySelector(".hover-caption");
+              if (imageEl) imageEl.style.transform = "scale(1.05)";
               if (captionEl) captionEl.style.opacity = 1;
             }}
             onMouseOut={(e) => {
-              const imageEl = e.currentTarget.querySelector('img');
-              const captionEl = e.currentTarget.querySelector('.hover-caption');
-              if (imageEl) imageEl.style.transform = 'scale(1)';
+              const imageEl = e.currentTarget.querySelector("img");
+              const captionEl = e.currentTarget.querySelector(".hover-caption");
+              if (imageEl) imageEl.style.transform = "scale(1)";
               if (captionEl) captionEl.style.opacity = 0;
             }}
           >
-            <img
-              src={img}
-              alt={`Shorts ${idx + 1}`}
-              style={imgStyle}
-            />
-            <div className="hover-caption" style={{ marginTop: '8px', textAlign: 'center', color: '#333', fontWeight: 600, lineHeight: 1.4, opacity: 0, transition: 'opacity 0.2s ease' }}>{`${['Deportivos','Casuales','Trabajo'][idx] || 'Modelo Shorts'} ${idx + 1}`}</div>
+            <img src={img} alt={`Shorts ${idx + 1}`} style={imgStyle} />
+            <div
+              className="hover-caption"
+              style={{
+                marginTop: "8px",
+                textAlign: "center",
+                color: "#333",
+                fontWeight: 600,
+                lineHeight: 1.4,
+                opacity: 0,
+                transition: "opacity 0.2s ease",
+              }}
+            >{`${
+              ["Deportivos", "Casuales", "Trabajo"][idx] || "Modelo Shorts"
+            } ${idx + 1}`}</div>
           </div>
         ))}
       </div>
