@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getProductData } from "../data/productData";
 import img1 from "../assets/mandil/MOD-0065.jpg";
 
 const gridStyle = {
@@ -46,7 +47,7 @@ const hoverCaptionStyle = {
 
 const arrowStyle = {
   fontSize: "2rem",
-  color: "#db1c7c",
+  color: "#000",
   background: "none",
   border: "none",
   cursor: "pointer",
@@ -55,8 +56,106 @@ const arrowStyle = {
   alignItems: "center",
 };
 
+const modalOverlayStyle = {
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100vw",
+  height: "100vh",
+  background: "rgba(0,0,0,0.8)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: 2000,
+  padding: "20px",
+};
+
+const modalContentStyle = {
+  background: "white",
+  borderRadius: "20px",
+  padding: "30px",
+  maxWidth: "90vw",
+  maxHeight: "90vh",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "20px",
+  position: "relative",
+};
+
+const modalImageStyle = {
+  maxWidth: "100%",
+  maxHeight: "60vh",
+  objectFit: "contain",
+  borderRadius: "12px",
+};
+
+const modalTextStyle = {
+  textAlign: "center",
+  color: "#333",
+  lineHeight: "1.6",
+};
+
+const openInNewTabBtnStyle = {
+  position: "absolute",
+  top: "14px",
+  left: "16px",
+  padding: "6px 10px",
+  borderRadius: "8px",
+  border: "1px solid #e0e0e0",
+  background: "#ffffff",
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "16px",
+};
+
+const squareIconStyle = {
+  width: "18px",
+  height: "18px",
+  border: "1px solid #999",
+  borderRadius: "4px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "12px",
+  lineHeight: 1,
+  color: "#333",
+};
+
+const closeButtonStyle = {
+  position: "absolute",
+  top: "15px",
+  right: "20px",
+  background: "none",
+  border: "none",
+  fontSize: "2rem",
+  cursor: "pointer",
+  color: "#000",
+  fontWeight: "bold",
+};
+
 const Mandil = () => {
   const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageClick = (img, idx) => {
+    setSelectedImage({ img, idx });
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImage(null);
+  };
+
+  const getImageInfo = (idx) => {
+    const product = getProductData('mandil', idx);
+    return `MOD. ${product.code}`;
+  };
+
+  const getProductDetails = (idx) => {
+    return getProductData('mandil', idx);
+  };
   return (
     <div style={pageStyle}>
       <button
@@ -70,6 +169,7 @@ const Mandil = () => {
       <div style={gridStyle}>
         <div
           style={imageCardStyle}
+          onClick={() => handleImageClick(img1, 0)}
           onMouseOver={(e) => {
             const imageEl = e.currentTarget.querySelector('img');
             const captionEl = e.currentTarget.querySelector('.hover-caption');
@@ -84,9 +184,69 @@ const Mandil = () => {
           }}
         >
           <img src={img1} alt="Mandil 1" style={imgStyle} />
-          <div className="hover-caption" style={hoverCaptionStyle}>Mandil resistente para uso intensivo</div>
+          <div className="hover-caption" style={hoverCaptionStyle}>{getImageInfo(0)}</div>
         </div>
       </div>
+
+      {selectedImage && (
+        <div style={modalOverlayStyle} onClick={handleCloseModal}>
+          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
+            <button
+              style={closeButtonStyle}
+              onClick={handleCloseModal}
+              aria-label="Cerrar"
+            >
+              ×
+            </button>
+            <button
+              style={openInNewTabBtnStyle}
+              onClick={() =>
+                window.open(selectedImage.img, "_blank", "noopener,noreferrer")
+              }
+              aria-label="Abrir en nueva pestaña"
+              title="Abrir en nueva pestaña"
+            >
+              <span style={squareIconStyle}>↗</span>
+            </button>
+            <img
+              src={selectedImage.img}
+              alt={`Mandil ${selectedImage.idx + 1}`}
+              style={modalImageStyle}
+            />
+            <div style={modalTextStyle}>
+              <h3 style={{ color: "#000", marginBottom: "6px", fontSize: "16px" }}>
+                {getImageInfo(selectedImage.idx)}
+              </h3>
+              {(() => {
+                const product = getProductDetails(selectedImage.idx);
+                return (
+                  <div style={{ textAlign: "left", maxWidth: "400px" }}>
+                    <h4 style={{ color: "#000", marginBottom: "4px", fontSize: "14px" }}>{product.name}</h4>
+                    <div style={{ marginBottom: "4px", fontSize: "12px" }}>
+                      <strong>Material:</strong> {product.material}
+                    </div>
+                    <div style={{ marginBottom: "4px", fontSize: "12px" }}>
+                      <strong>Tallas:</strong> {product.sizes.join(", ")}
+                    </div>
+                    <div style={{ marginBottom: "4px", fontSize: "12px" }}>
+                      <strong>Colores:</strong> {product.colors.join(", ")}
+                    </div>
+                    <div style={{ marginBottom: "4px", fontSize: "12px" }}>
+                      <strong>Características:</strong> {product.features.join(", ")}
+                    </div>
+                    <div style={{ marginBottom: "4px", fontSize: "12px" }}>
+                      <strong>Cuidado:</strong> {product.care}
+                    </div>
+                    <div style={{ marginBottom: "4px", fontSize: "12px" }}>
+                      <strong>Precio:</strong> {product.price}
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import foto2 from "../assets/shorts/MOD-0163.jpg";
 import foto3 from "../assets/shorts/MOD-0167.jpg";
 
 import { useNavigate } from "react-router-dom";
+import { getProductData } from "../data/productData";
 
 const gridStyle = {
   display: "grid",
@@ -55,6 +56,34 @@ const modalContentStyle = {
   position: "relative",
 };
 
+const openInNewTabBtnStyle = {
+  position: "absolute",
+  top: "14px",
+  left: "16px",
+  padding: "6px 10px",
+  borderRadius: "8px",
+  border: "1px solid #e0e0e0",
+  background: "#ffffff",
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "16px",
+};
+
+const squareIconStyle = {
+  width: "18px",
+  height: "18px",
+  border: "1px solid #999",
+  borderRadius: "4px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "12px",
+  lineHeight: 1,
+  color: "#333",
+};
+
 const modalImageStyle = {
   maxWidth: "100%",
   maxHeight: "60vh",
@@ -76,13 +105,13 @@ const closeButtonStyle = {
   border: "none",
   fontSize: "2rem",
   cursor: "pointer",
-  color: "#db1c7c",
+  color: "#000",
   fontWeight: "bold",
 };
 
 const arrowStyle = {
   fontSize: "2rem",
-  color: "#db1c7c",
+  color: "#000",
   background: "none",
   border: "none",
   cursor: "pointer",
@@ -106,12 +135,12 @@ const Shorts = () => {
   };
 
   const getImageInfo = (idx) => {
-    const info = [
-      "Shorts deportivos con tecnología de secado rápido. Perfectos para actividades físicas y deportes.",
-      "Shorts casuales con diseño moderno y cómodo. Ideales para el día a día y actividades recreativas.",
-      "Shorts de trabajo resistentes y funcionales. Diseñados para profesionales que requieren movilidad.",
-    ];
-    return info[idx] || "Shorts de alta calidad con diseño especializado.";
+    const product = getProductData('shorts', idx);
+    return `MOD. ${product.code}`;
+  };
+
+  const getProductDetails = (idx) => {
+    return getProductData('shorts', idx);
   };
 
   return (
@@ -161,9 +190,7 @@ const Shorts = () => {
                 opacity: 0,
                 transition: "opacity 0.2s ease",
               }}
-            >{`${
-              ["Deportivos", "Casuales", "Trabajo"][idx] || "Modelo Shorts"
-            } ${idx + 1}`}</div>
+            >{getImageInfo(idx)}</div>
           </div>
         ))}
       </div>
@@ -178,16 +205,51 @@ const Shorts = () => {
             >
               ×
             </button>
+            <button
+              style={openInNewTabBtnStyle}
+              onClick={() =>
+                window.open(selectedImage.img, "_blank", "noopener,noreferrer")
+              }
+              aria-label="Abrir en nueva pestaña"
+              title="Abrir en nueva pestaña"
+            >
+              <span style={squareIconStyle}>↗</span>
+            </button>
             <img
               src={selectedImage.img}
               alt={`Shorts ${selectedImage.idx + 1}`}
               style={modalImageStyle}
             />
             <div style={modalTextStyle}>
-              <h3 style={{ color: "#db1c7c", marginBottom: "10px" }}>
-                Shorts {selectedImage.idx + 1}
+              <h3 style={{ color: "#000", marginBottom: "6px", fontSize: "16px" }}>
+                {getImageInfo(selectedImage.idx)}
               </h3>
-              <p>{getImageInfo(selectedImage.idx)}</p>
+              {(() => {
+                const product = getProductDetails(selectedImage.idx);
+                return (
+                  <div style={{ textAlign: "left", maxWidth: "400px" }}>
+                    <h4 style={{ color: "#000", marginBottom: "4px", fontSize: "14px" }}>{product.name}</h4>
+                    <div style={{ marginBottom: "4px", fontSize: "12px" }}>
+                      <strong>Material:</strong> {product.material}
+                    </div>
+                    <div style={{ marginBottom: "4px", fontSize: "12px" }}>
+                      <strong>Tallas:</strong> {product.sizes.join(", ")}
+                    </div>
+                    <div style={{ marginBottom: "4px", fontSize: "12px" }}>
+                      <strong>Colores:</strong> {product.colors.join(", ")}
+                    </div>
+                    <div style={{ marginBottom: "4px", fontSize: "12px" }}>
+                      <strong>Características:</strong> {product.features.join(", ")}
+                    </div>
+                    <div style={{ marginBottom: "4px", fontSize: "12px" }}>
+                      <strong>Cuidado:</strong> {product.care}
+                    </div>
+                    <div style={{ marginBottom: "4px", fontSize: "12px" }}>
+                      <strong>Precio:</strong> {product.price}
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </div>

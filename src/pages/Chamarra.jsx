@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import foto1 from "../assets/chamarra/MOD-0003.jpg";
 import foto2 from "../assets/chamarra/MOD-004.jpg";
 import foto3 from "../assets/chamarra/MOD-0077.jpg";
@@ -13,6 +13,7 @@ import foto11 from "../assets/chamarra/MOD-0175.jpg";
 import foto12 from "../assets/chamarra/MOD-0193.jpg";
 
 import { useNavigate } from "react-router-dom";
+import { getProductData } from "../data/productData";
 
 const gridStyle = {
   display: "grid",
@@ -77,36 +78,6 @@ const modalTextStyle = {
   lineHeight: "1.6",
 };
 
-const deepZoomOverlayStyle = {
-  position: "fixed",
-  inset: 0,
-  background: "rgba(0,0,0,0.9)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  zIndex: 3000,
-  padding: 0,
-};
-
-const deepZoomImgBaseStyle = {
-  maxWidth: "98vw",
-  maxHeight: "98vh",
-  objectFit: "contain",
-  borderRadius: "12px",
-  transition: "transform 0.15s ease",
-};
-
-const deepZoomCloseStyle = {
-  position: "absolute",
-  top: "14px",
-  right: "16px",
-  background: "#ffffff",
-  border: "none",
-  borderRadius: "8px",
-  padding: "8px 12px",
-  cursor: "pointer",
-  fontSize: "1rem",
-};
 
 const openInNewTabBtnStyle = {
   position: "absolute",
@@ -144,13 +115,13 @@ const closeButtonStyle = {
   border: "none",
   fontSize: "2rem",
   cursor: "pointer",
-  color: "#db1c7c",
+  color: "#000",
   fontWeight: "bold",
 };
 
 const arrowStyle = {
   fontSize: "2rem",
-  color: "#db1c7c",
+  color: "#000",
   background: "none",
   border: "none",
   cursor: "pointer",
@@ -201,16 +172,6 @@ const hoverCaptionStyle = {
 const Chamarra = () => {
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState(null);
-  const [isEnlarged, setIsEnlarged] = useState(false);
-  const [transformOrigin, setTransformOrigin] = useState("center center");
-  const [showDeepZoom, setShowDeepZoom] = useState(false);
-  const [deepZoomScale, setDeepZoomScale] = useState(3.0);
-  // Drag to pan when zoomed in
-  const [isDragging, setIsDragging] = useState(false);
-  const [lastPos, setLastPos] = useState({ x: 0, y: 0 });
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [mouseDownInfo, setMouseDownInfo] = useState({ x: 0, y: 0, t: 0 });
-  // Drag/offset disabled to keep image fixed while magnifying
 
   const handleImageClick = (img, idx) => {
     setSelectedImage({ img, idx });
@@ -218,45 +179,16 @@ const Chamarra = () => {
 
   const handleCloseModal = () => {
     setSelectedImage(null);
-    setIsEnlarged(false);
-    setShowDeepZoom(false);
-    setDeepZoomScale(1.8);
-    setOffset({ x: 0, y: 0 });
   };
 
-  const handleWheelZoom = (e) => {
-    e.preventDefault();
-    const delta = e.deltaY > 0 ? -0.35 : 0.35;
-    setDeepZoomScale((s) => Math.max(1, Math.min(8, s + delta)));
-  };
-
-  // Prevent background scroll when deep zoom open
-  useEffect(() => {
-    if (showDeepZoom) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }
-  }, [showDeepZoom]);
 
   const getImageInfo = (idx) => {
-    const info = [
-      "MOD.003\nChamarra con forro y cuello alto, manga ranglan de dos piezas, corte en pecho y espalda con bies con piola en contraste. Jareta en parte inferior, Bordado en delantero izquierdo y centro espalda.",
-      "Chamarra deportiva con tecnología de última generación. Ideal para actividades al aire libre.",
-      "Chamarra casual con estilo urbano. Cómoda y versátil para el día a día.",
-      "Chamarra de trabajo resistente y duradera. Diseñada para profesionales exigentes.",
-      "Chamarra de temporada con materiales premium. Elegancia y funcionalidad en una sola prenda.",
-      "Chamarra especializada con características técnicas avanzadas. Para usuarios profesionales.",
-      "Chamarra con diseño innovador y materiales de alta calidad. Estilo y comodidad garantizados.",
-      "Chamarra versátil que combina funcionalidad y moda. Perfecta para cualquier ocasión.",
-      "Chamarra premium con acabados de lujo. Para quienes buscan la máxima calidad.",
-      "Chamarra técnica con características especiales. Diseñada para necesidades específicas.",
-      "Chamarra con estilo contemporáneo y materiales sostenibles. Moda consciente y elegante.",
-      "Chamarra exclusiva con diseño único. Para personalidades que buscan destacar.",
-    ];
-    return info[idx] || "Chamarra de alta calidad con diseño exclusivo.";
+    const product = getProductData('chamarra', idx);
+    return `MOD. ${product.code}`;
+  };
+
+  const getProductDetails = (idx) => {
+    return getProductData('chamarra', idx);
   };
 
   return (
@@ -319,90 +251,80 @@ const Chamarra = () => {
             <img
               src={selectedImage.img}
               alt={`Chamarra ${selectedImage.idx + 1}`}
-              style={{
-                ...modalImageStyle,
-                cursor: isEnlarged ? "zoom-out" : "zoom-in",
-                transform: isEnlarged ? "scale(2.0)" : "scale(1)",
-                transformOrigin: "center center",
-                transition: "transform 0.2s ease, transform-origin 0.1s ease",
-              }}
-              onClick={() => setIsEnlarged((v) => !v)}
+              style={modalImageStyle}
             />
             <div style={modalTextStyle}>
-              <h3 style={{ color: "#db1c7c", marginBottom: "10px" }}>
-                Chamarra {selectedImage.idx + 1}
+              <h3 style={{ color: "#000", marginBottom: "8px", fontSize: "16px" }}>
+                {getImageInfo(selectedImage.idx)}
               </h3>
-              <p>{getImageInfo(selectedImage.idx)}</p>
+              {(() => {
+                const product = getProductDetails(selectedImage.idx);
+                return (
+                  <div style={{ 
+                    textAlign: "left", 
+                    maxWidth: "400px",
+                    width: "100%"
+                  }}>
+                    <h4 style={{ 
+                      color: "#000", 
+                      marginBottom: "6px", 
+                      fontSize: "14px",
+                      fontWeight: "600"
+                    }}>
+                      {product.name}
+                    </h4>
+                    
+                    <div style={{ 
+                      display: "grid", 
+                      gridTemplateColumns: "1fr 1fr", 
+                      gap: "8px",
+                      marginBottom: "8px"
+                    }}>
+                      <div>
+                        <div style={{ fontSize: "10px", color: "#000", marginBottom: "1px", fontWeight: "500" }}>MATERIAL</div>
+                        <div style={{ fontSize: "11px", color: "#000", lineHeight: "1.2" }}>{product.material}</div>
+                      </div>
+                      <div>
+                        <div style={{ fontSize: "10px", color: "#000", marginBottom: "1px", fontWeight: "500" }}>TALLAS</div>
+                        <div style={{ fontSize: "11px", color: "#000", lineHeight: "1.2" }}>{product.sizes.join(", ")}</div>
+                      </div>
+                    </div>
+
+                    <div style={{ 
+                      display: "grid", 
+                      gridTemplateColumns: "1fr 1fr", 
+                      gap: "8px",
+                      marginBottom: "8px"
+                    }}>
+                      <div>
+                        <div style={{ fontSize: "10px", color: "#000", marginBottom: "1px", fontWeight: "500" }}>COLORES</div>
+                        <div style={{ fontSize: "11px", color: "#000", lineHeight: "1.2" }}>{product.colors.join(", ")}</div>
+                      </div>
+                      <div>
+                        <div style={{ fontSize: "10px", color: "#000", marginBottom: "1px", fontWeight: "500" }}>PRECIO</div>
+                        <div style={{ fontSize: "11px", color: "#000", fontWeight: "500" }}>{product.price}</div>
+                      </div>
+                    </div>
+
+                    <div style={{ marginBottom: "6px" }}>
+                      <div style={{ fontSize: "10px", color: "#000", marginBottom: "1px", fontWeight: "500" }}>CARACTERÍSTICAS</div>
+                      <div style={{ fontSize: "11px", color: "#000", lineHeight: "1.2" }}>
+                        {product.features.join(" • ")}
+                      </div>
+                    </div>
+
+                    <div>
+                      <div style={{ fontSize: "10px", color: "#000", marginBottom: "1px", fontWeight: "500" }}>CUIDADO</div>
+                      <div style={{ fontSize: "11px", color: "#000", lineHeight: "1.2" }}>{product.care}</div>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </div>
       )}
 
-      {showDeepZoom && selectedImage && (
-        <div
-          style={deepZoomOverlayStyle}
-          onClick={() => setShowDeepZoom(false)}
-        >
-          <button
-            style={deepZoomCloseStyle}
-            onClick={() => setShowDeepZoom(false)}
-            aria-label="Cerrar ampliación"
-          >
-            Cerrar
-          </button>
-          <img
-            src={selectedImage.img}
-            alt={`Chamarra ${selectedImage.idx + 1} ampliada`}
-            style={{
-              ...deepZoomImgBaseStyle,
-              transform:
-                deepZoomScale > 1
-                  ? `translate(${offset.x}px, ${offset.y}px) scale(${deepZoomScale})`
-                  : `scale(${deepZoomScale})`,
-              cursor:
-                deepZoomScale > 1
-                  ? isDragging
-                    ? "grabbing"
-                    : "grab"
-                  : "zoom-in",
-            }}
-            onWheel={handleWheelZoom}
-            onMouseDown={(e) => {
-              if (deepZoomScale <= 1) return;
-              e.preventDefault();
-              setIsDragging(true);
-              setLastPos({ x: e.clientX, y: e.clientY });
-              setMouseDownInfo({ x: e.clientX, y: e.clientY, t: Date.now() });
-            }}
-            onMouseMove={(e) => {
-              if (!isDragging) return;
-              const dx = e.clientX - lastPos.x;
-              const dy = e.clientY - lastPos.y;
-              setLastPos({ x: e.clientX, y: e.clientY });
-              setOffset((o) => ({ x: o.x + dx, y: o.y + dy }));
-            }}
-            onMouseUp={(e) => {
-              const dt = Date.now() - mouseDownInfo.t;
-              const dist = Math.hypot(
-                e.clientX - mouseDownInfo.x,
-                e.clientY - mouseDownInfo.y
-              );
-              setIsDragging(false);
-              e.stopPropagation();
-              // If it was a click (not a drag), toggle zoom
-              if (dt < 250 && dist < 5) {
-                if (deepZoomScale > 1) {
-                  setDeepZoomScale(1);
-                  setOffset({ x: 0, y: 0 });
-                } else {
-                  setDeepZoomScale(4.0);
-                }
-              }
-            }}
-            onMouseLeave={() => setIsDragging(false)}
-          />
-        </div>
-      )}
     </div>
   );
 };
