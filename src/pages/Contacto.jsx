@@ -120,7 +120,7 @@ const Contacto = () => {
           onSubmit={handleSubmit}
         >
           <h2 style={{ ...formHeaderStyle, gridColumn: '1 / -1' }}>Ponte en contacto con nosotros</h2>
-          <input type="hidden" name="_subject" value="Nuevo mensaje desde Uniformes CANDI" />
+          <input type="hidden" name="_subject" value="Nuevo mensaje desde Uniformes Candi" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
           <input style={inputStyle} type="text" name="name" placeholder="Nombre" required />

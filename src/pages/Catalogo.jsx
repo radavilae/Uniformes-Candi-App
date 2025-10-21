@@ -170,7 +170,7 @@ function Catalogo() {
             </button>
           )}
           <div style={toolbarStyle}>
-            <div style={badgeStyle}>CANDI 2025</div>
+            <div style={badgeStyle}>Candi 2025</div>
             <div style={actionsStyle}>
               <div style={{display:'flex', alignItems:'center'}} onMouseEnter={()=>setHovered('open')} onMouseLeave={()=>setHovered(null)}>
                 <a
