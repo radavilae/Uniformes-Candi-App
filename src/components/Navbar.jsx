@@ -1,50 +1,51 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import "./Navbar.css";
+import { FiMenu, FiX } from "react-icons/fi";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const navItems = [
+    { path: "/", label: "INICIO" },
+    { path: "/productos", label: "PRODUCTOS" },
+    { path: "/catalogo", label: "CATÁLOGO" },
+    { path: "/contacto", label: "CONTACTO" },
+  ];
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <div className="nav-brand"></div>
+        <Link to="/" className="nav-brand">
+          <span className="brand-text">CANDI</span>
+        </Link>
 
         <button
           className="hamburger-menu"
           onClick={toggleMenu}
           aria-label="Menu"
+          aria-expanded={isMenuOpen}
         >
-          <span className={`hamburger-line ${isMenuOpen ? "open" : ""}`}></span>
-          <span className={`hamburger-line ${isMenuOpen ? "open" : ""}`}></span>
-          <span className={`hamburger-line ${isMenuOpen ? "open" : ""}`}></span>
+          {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>
 
         <ul className={`nav-links ${isMenuOpen ? "active" : ""}`}>
-          <li>
-            <Link to="/" onClick={() => setIsMenuOpen(false)}>
-              INICIO
-            </Link>
-          </li>
-          <li>
-            <Link to="/productos" onClick={() => setIsMenuOpen(false)}>
-              PRODUCTOS
-            </Link>
-          </li>
-          <li>
-            <Link to="/catalogo" onClick={() => setIsMenuOpen(false)}>
-              CATÁLOGO
-            </Link>
-          </li>
-          <li>
-            <Link to="/contacto" onClick={() => setIsMenuOpen(false)}>
-              CONTACTO
-            </Link>
-          </li>
+          {navItems.map((item) => (
+            <li key={item.path}>
+              <Link
+                to={item.path}
+                onClick={() => setIsMenuOpen(false)}
+                className={location.pathname === item.path ? "active" : ""}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </nav>
