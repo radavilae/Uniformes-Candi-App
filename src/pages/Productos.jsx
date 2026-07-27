@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.jpg";
 import { FiArrowRight, FiHeart, FiShoppingBag } from "react-icons/fi";
+import "./Productos.css";
 
 // Chamarra photos
 import chamarra1 from "../assets/chamarra/MOD-0003.jpg";
@@ -193,189 +194,6 @@ function getRandomImage(exclude, category = "general") {
   return filtered[Math.floor(Math.random() * filtered.length)];
 }
 
-const gridStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-  gap: "32px",
-  padding: "80px 24px",
-  maxWidth: "1400px",
-  margin: "0 auto",
-  position: "relative",
-  zIndex: 1,
-};
-
-const pageStyle = {
-  background: "linear-gradient(180deg, #fafafa 0%, #ffffff 100%)",
-  minHeight: "100vh",
-  paddingBottom: "80px",
-  position: "relative",
-  overflow: "hidden",
-};
-
-const headerStyle = {
-  textAlign: "center",
-  padding: "60px 20px 40px",
-  position: "relative",
-  zIndex: 2,
-};
-
-const headerTitle = {
-  fontSize: "clamp(2rem, 5vw, 3rem)",
-  fontWeight: 800,
-  color: "#1a1a1a",
-  marginBottom: "16px",
-  letterSpacing: "-1px",
-};
-
-const headerSubtitle = {
-  fontSize: "clamp(1rem, 2vw, 1.2rem)",
-  color: "#666",
-  maxWidth: "600px",
-  margin: "0 auto",
-  lineHeight: "1.6",
-};
-
-const watermarkWrapperStyle = {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  pointerEvents: "none",
-  zIndex: 0,
-};
-
-const watermarkImageStyle = {
-  width: "60vw",
-  maxWidth: "800px",
-  minWidth: "360px",
-  opacity: 0.04,
-  filter: "grayscale(100%)",
-};
-
-const getCardStyle = (idx) => {
-  return {
-    background: "white",
-    borderRadius: "20px",
-    padding: "0",
-    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
-    border: "1px solid rgba(0, 0, 0, 0.06)",
-    transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-    cursor: "pointer",
-    position: "relative",
-    overflow: "hidden",
-    width: "100%",
-    maxWidth: "380px",
-  };
-};
-
-const imgContainerStyle = {
-  position: "relative",
-  overflow: "hidden",
-  borderRadius: "20px 20px 0 0",
-  aspectRatio: "4/5",
-};
-
-const imgStyle = {
-  width: "100%",
-  height: "100%",
-  objectFit: "cover",
-  transition: "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
-};
-
-const imgOverlay = {
-  position: "absolute",
-  inset: 0,
-  background: "linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 50%)",
-  opacity: 0,
-  transition: "opacity 0.4s ease",
-};
-
-const quickActions = {
-  position: "absolute",
-  bottom: "16px",
-  right: "16px",
-  display: "flex",
-  gap: "8px",
-  opacity: 0,
-  transform: "translateY(10px)",
-  transition: "all 0.3s ease",
-};
-
-const actionButton = {
-  width: "40px",
-  height: "40px",
-  borderRadius: "50%",
-  background: "white",
-  border: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  cursor: "pointer",
-  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-  transition: "all 0.3s ease",
-  color: "#1a1a1a",
-};
-
-const cardContent = {
-  padding: "20px",
-};
-
-const getTitleStyle = (idx) => {
-  return {
-    fontSize: "1.1rem",
-    fontWeight: 700,
-    color: "#1a1a1a",
-    marginBottom: "8px",
-    letterSpacing: "-0.3px",
-    textTransform: "none",
-  };
-};
-
-const cardMeta = {
-  display: "flex",
-  alignItems: "center",
-  gap: "12px",
-  marginBottom: "12px",
-};
-
-const metaBadge = {
-  fontSize: "0.75rem",
-  fontWeight: 600,
-  padding: "4px 10px",
-  borderRadius: "20px",
-  background: "#f5f5f5",
-  color: "#666",
-};
-
-const cardDescription = {
-  fontSize: "0.9rem",
-  color: "#888",
-  lineHeight: "1.5",
-  marginBottom: "16px",
-};
-
-const cardFooter = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  paddingTop: "16px",
-  borderTop: "1px solid #f0f0f0",
-};
-
-const viewButton = {
-  display: "flex",
-  alignItems: "center",
-  gap: "6px",
-  fontSize: "0.9rem",
-  fontWeight: 600,
-  color: "#db1c7c",
-  textDecoration: "none",
-  transition: "gap 0.3s ease",
-};
 
 const Productos = () => {
   const [imgs] = useState([
@@ -428,48 +246,32 @@ const Productos = () => {
   ];
 
   return (
-    <div style={pageStyle}>
-      <div style={watermarkWrapperStyle}>
-        <img src={logo} alt="Candi watermark" style={watermarkImageStyle} />
+    <div className="productos-page">
+      <div className="productos-watermark">
+        <img src={logo} alt="Candi watermark" />
       </div>
       
-      <div style={headerStyle}>
-        <h1 style={headerTitle}>Nuestra Colección</h1>
-        <p style={headerSubtitle}>
+      <div className="productos-header">
+        <h1>Nuestra Colección</h1>
+        <p>
           Descubre nuestra línea completa de uniformes diseñados con los más altos estándares de calidad y estilo
         </p>
       </div>
       
-      <div style={gridStyle}>
+      <div className="productos-grid">
         {imgs.map((foto, idx) => {
           return (
             <div
               key={idx}
-              style={getCardStyle(idx)}
+              className="product-card"
               onClick={() => handleClick(idx)}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = "translateY(-8px)";
-                e.currentTarget.style.boxShadow = "0 20px 40px rgba(0, 0, 0, 0.12)";
-                e.currentTarget.querySelector("img").style.transform = "scale(1.08)";
-                e.currentTarget.querySelector(".img-overlay").style.opacity = "1";
-                e.currentTarget.querySelector(".quick-actions").style.opacity = "1";
-                e.currentTarget.querySelector(".quick-actions").style.transform = "translateY(0)";
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.08)";
-                e.currentTarget.querySelector("img").style.transform = "scale(1)";
-                e.currentTarget.querySelector(".img-overlay").style.opacity = "0";
-                e.currentTarget.querySelector(".quick-actions").style.opacity = "0";
-                e.currentTarget.querySelector(".quick-actions").style.transform = "translateY(10px)";
-              }}
             >
-              <div style={imgContainerStyle}>
-                <img src={foto} alt={titles[idx]} style={imgStyle} />
-                <div className="img-overlay" style={imgOverlay}></div>
-                <div className="quick-actions" style={quickActions}>
+              <div className="product-card-img-container">
+                <img src={foto} alt={titles[idx]} className="product-card-img" />
+                <div className="img-overlay"></div>
+                <div className="quick-actions">
                   <button 
-                    style={actionButton}
+                    className="action-button"
                     onClick={(e) => {
                       e.stopPropagation();
                     }}
@@ -478,7 +280,7 @@ const Productos = () => {
                     <FiHeart size={18} />
                   </button>
                   <button 
-                    style={actionButton}
+                    className="action-button"
                     onClick={(e) => {
                       e.stopPropagation();
                     }}
@@ -489,18 +291,18 @@ const Productos = () => {
                 </div>
               </div>
               
-              <div style={cardContent}>
-                <div style={cardMeta}>
-                  <span style={metaBadge}>{counts[idx]}</span>
-                  <span style={{...metaBadge, background: "linear-gradient(135deg, #db1c7c20 0%, #e91e6320 100%)", color: "#db1c7c"}}>Premium</span>
+              <div className="product-card-content">
+                <div className="product-card-meta">
+                  <span className="meta-badge">{counts[idx]}</span>
+                  <span className="meta-badge premium">Premium</span>
                 </div>
                 
-                <h3 style={getTitleStyle(idx)}>{titles[idx]}</h3>
-                <p style={cardDescription}>{descriptions[idx]}</p>
+                <h3 className="product-card-title">{titles[idx]}</h3>
+                <p className="product-card-description">{descriptions[idx]}</p>
                 
-                <div style={cardFooter}>
-                  <span style={{fontSize: "0.85rem", color: "#999"}}>Ver detalles</span>
-                  <div style={viewButton}>
+                <div className="product-card-footer">
+                  <span className="view-details">Ver detalles</span>
+                  <div className="view-button">
                     <FiArrowRight size={16} />
                   </div>
                 </div>
