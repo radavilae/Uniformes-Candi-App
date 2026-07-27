@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import logo from "./assets/logo.jpg";
 import Navbar from "./components/Navbar";
+import ChatWidget from "./components/ChatWidget";
 import Nosotros from "./pages/Nosotros";
 import Contacto from "./pages/Contacto";
 import c40anos from "./assets/40candi.jpeg";
@@ -151,6 +152,9 @@ function App() {
 
           </Routes>
         </div>
+
+        {/* Chat Widget */}
+        <ChatWidget />
       </div>
     </Router>
   );
