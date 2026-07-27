@@ -52,6 +52,46 @@
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
 }
 
+/* Skip Intro Button Responsive */
+@media screen and (max-width: 768px) {
+  .skip-intro-btn {
+    bottom: 30px;
+    right: 50%;
+    transform: translateX(50%);
+    padding: 16px 32px;
+    font-size: 1rem;
+    border-radius: 50px;
+    min-width: 200px;
+    min-height: 50px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+  }
+
+  .skip-intro-btn:hover {
+    transform: translateX(50%) translateY(-2px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .skip-intro-btn {
+    bottom: 24px;
+    padding: 14px 28px;
+    font-size: 0.95rem;
+    min-width: 180px;
+    min-height: 48px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .skip-intro-btn {
+    bottom: 20px;
+    padding: 12px 24px;
+    font-size: 0.9rem;
+    min-width: 160px;
+    min-height: 44px;
+  }
+}
+
 .main-content {
   opacity: 0;
   transform: translateY(20px);
