@@ -51,7 +51,7 @@ function App() {
         {showIntro && (
           <div className="intro-video-container">
             <iframe
-              src="https://player.mux.com/sOeilQisnfyn2I4adlUglkOC89xkmZlW2oSH1jDgIXY?autoplay=true&muted=true&loop=false"
+              src="https://player.mux.com/sOeilQisnfyn2I4adlUglkOC89xkmZlW2oSH1jDgIXY?autoplay=true&muted=false&loop=false&controls=true"
               allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
               title="Videocandi Intro"
