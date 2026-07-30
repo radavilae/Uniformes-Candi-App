@@ -55,7 +55,7 @@
 /* Skip Intro Button Responsive */
 @media screen and (max-width: 768px) {
   .skip-intro-btn {
-    bottom: 30px;
+    bottom: 80px;
     right: 50%;
     transform: translateX(50%);
     padding: 16px 32px;
@@ -74,7 +74,7 @@
 
 @media screen and (max-width: 480px) {
   .skip-intro-btn {
-    bottom: 24px;
+    bottom: 60px;
     padding: 14px 28px;
     font-size: 0.95rem;
     min-width: 180px;
@@ -84,7 +84,7 @@
 
 @media screen and (max-width: 360px) {
   .skip-intro-btn {
-    bottom: 20px;
+    bottom: 50px;
     padding: 12px 24px;
     font-size: 0.9rem;
     min-width: 160px;
