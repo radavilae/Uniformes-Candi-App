@@ -1,0 +1,281 @@
+.chaleco-page {
+  background: #ffffff;
+  min-height: 100vh;
+  padding-bottom: 24px;
+}
+
+.chaleco-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(260px, 340px));
+  gap: 80px;
+  padding: 40px 60px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .chaleco-grid {
+    grid-template-columns: repeat(2, minmax(220px, 300px));
+    gap: 40px;
+    padding: 30px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .chaleco-grid {
+    grid-template-columns: repeat(2, minmax(180px, 250px));
+    gap: 30px;
+    padding: 20px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chaleco-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 16px 16px;
+  }
+}
+
+.back-button {
+  font-size: 2rem;
+  color: #000;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 24px 0 0 12px;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .back-button {
+    font-size: 1.5rem;
+    margin: 16px 0 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .back-button {
+    font-size: 1.3rem;
+    margin: 12px 0 0 12px;
+  }
+}
+
+.image-card {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.image-card img {
+  width: 100%;
+  max-width: 340px;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .image-card img {
+    max-width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-card img {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+}
+
+.hover-caption {
+  margin-top: 8px;
+  text-align: center;
+  color: #333;
+  font-weight: 600;
+  line-height: 1.4;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .hover-caption {
+    opacity: 1;
+    font-size: 0.9rem;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 20px;
+    max-width: 95vw;
+    max-height: 95vh;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 16px;
+    gap: 12px;
+    border-radius: 16px;
+  }
+}
+
+.modal-image {
+  max-width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .modal-image {
+    max-height: 50vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-image {
+    max-height: 40vh;
+    border-radius: 8px;
+  }
+}
+
+.modal-text {
+  text-align: center;
+  color: #333;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .modal-text {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-text {
+    font-size: 0.85rem;
+  }
+}
+
+.open-in-new-tab-btn {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .open-in-new-tab-btn {
+    top: 10px;
+    left: 10px;
+    padding: 5px 8px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .open-in-new-tab-btn {
+    top: 8px;
+    left: 8px;
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+}
+
+.square-icon {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 1;
+  color: #333;
+}
+
+@media (max-width: 480px) {
+  .square-icon {
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #000;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .close-button {
+    top: 10px;
+    right: 16px;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .close-button {
+    top: 8px;
+    right: 12px;
+    font-size: 1.3rem;
+  }
+}

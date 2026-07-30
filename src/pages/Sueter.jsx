@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getProductData } from "../data/productData";
+import "./ProductGrid.css";
 
 import img1 from "../assets/sueter/MOD-0009.jpg";
 import img2 from "../assets/sueter/MOD-0013.jpg";
@@ -19,138 +20,6 @@ import img14 from "../assets/sueter/MOD-0183.jpg";
 import img15 from "../assets/sueter/MOD-0191.jpg";
 import img16 from "../assets/sueter/MOD-0118.jpg";
 import img17 from "../assets/sueter/MOD-0185.jpg";
-
-const gridStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(3, minmax(260px, 340px))",
-  gap: "48px",
-  padding: "40px 20px",
-  width: "100%",
-  maxWidth: "1400px",
-  margin: "0 auto",
-  justifyContent: "space-between",
-  alignItems: "start",
-};
-
-const imgStyle = {
-  width: "100%",
-  maxWidth: "340px",
-  height: "340px",
-  objectFit: "cover",
-  borderRadius: "18px",
-  boxShadow: "none",
-  cursor: "pointer",
-  transition: "transform 0.2s, box-shadow 0.2s",
-};
-
-const imageCardStyle = {
-  position: "relative",
-  width: "100%",
-  maxWidth: "340px",
-  borderRadius: "18px",
-  overflow: "hidden",
-};
-
-const hoverCaptionStyle = {
-  marginTop: "8px",
-  textAlign: "center",
-  color: "#333",
-  fontWeight: 600,
-  lineHeight: 1.4,
-  opacity: 0,
-  transition: "opacity 0.2s ease",
-};
-
-const modalOverlayStyle = {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  width: "100vw",
-  height: "100vh",
-  background: "rgba(0,0,0,0.8)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  zIndex: 2000,
-  padding: "20px",
-};
-
-const modalContentStyle = {
-  background: "white",
-  borderRadius: "20px",
-  padding: "30px",
-  maxWidth: "90vw",
-  maxHeight: "90vh",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  gap: "20px",
-  position: "relative",
-};
-
-const modalImageStyle = {
-  maxWidth: "100%",
-  maxHeight: "60vh",
-  objectFit: "contain",
-  borderRadius: "12px",
-};
-
-const modalTextStyle = {
-  textAlign: "center",
-  color: "#333",
-  lineHeight: "1.6",
-};
-
-const openInNewTabBtnStyle = {
-  position: "absolute",
-  top: "14px",
-  left: "16px",
-  padding: "6px 10px",
-  borderRadius: "8px",
-  border: "1px solid #e0e0e0",
-  background: "#ffffff",
-  cursor: "pointer",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontSize: "16px",
-};
-
-const squareIconStyle = {
-  width: "18px",
-  height: "18px",
-  border: "1px solid #999",
-  borderRadius: "4px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontSize: "12px",
-  lineHeight: 1,
-  color: "#333",
-};
-
-const closeButtonStyle = {
-  position: "absolute",
-  top: "15px",
-  right: "20px",
-  background: "none",
-  border: "none",
-  fontSize: "2rem",
-  cursor: "pointer",
-  color: "#000",
-  fontWeight: "bold",
-};
-
-const arrowStyle = {
-  fontSize: "2rem",
-  color: "#000",
-  background: "none",
-  border: "none",
-  cursor: "pointer",
-  margin: "24px 0 0 12px",
-  display: "flex",
-  alignItems: "center",
-};
 
 const sueterImages = [
   img1,
@@ -194,20 +63,20 @@ const Sueter = () => {
   };
 
   return (
-    <div>
+    <div className="product-page">
       <button
-        style={arrowStyle}
+        className="back-button"
         onClick={() => navigate("/productos")}
         aria-label="Volver a productos"
       >
         ←
       </button>
       {/* Title removed as requested */}
-      <div style={gridStyle}>
+      <div className="product-grid">
         {sueterImages.map((img, idx) => (
           <div
             key={idx}
-            style={imageCardStyle}
+            className="image-card"
             onClick={() => handleImageClick(img, idx)}
             onMouseOver={(e) => {
               const imageEl = e.currentTarget.querySelector('img');
@@ -225,39 +94,38 @@ const Sueter = () => {
             <img
               src={img}
               alt={`Suéter ${idx + 1}`}
-              style={imgStyle}
             />
-            <div className="hover-caption" style={hoverCaptionStyle}>{getImageInfo(idx)}</div>
+            <div className="hover-caption">{getImageInfo(idx)}</div>
           </div>
         ))}
       </div>
 
       {selectedImage && (
-        <div style={modalOverlayStyle} onClick={handleCloseModal}>
-          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
+        <div className="modal-overlay" onClick={handleCloseModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button
-              style={closeButtonStyle}
+              className="close-button"
               onClick={handleCloseModal}
               aria-label="Cerrar"
             >
               ×
             </button>
             <button
-              style={openInNewTabBtnStyle}
+              className="open-in-new-tab-btn"
               onClick={() =>
                 window.open(selectedImage.img, "_blank", "noopener,noreferrer")
               }
               aria-label="Abrir en nueva pestaña"
               title="Abrir en nueva pestaña"
             >
-              <span style={squareIconStyle}>↗</span>
+              <span className="square-icon">↗</span>
             </button>
             <img
               src={selectedImage.img}
               alt={`Suéter ${selectedImage.idx + 1}`}
-              style={modalImageStyle}
+              className="modal-image"
             />
-            <div style={modalTextStyle}>
+            <div className="modal-text">
               <h3 style={{ color: "#000", marginBottom: "6px", fontSize: "16px" }}>
                 {getImageInfo(selectedImage.idx)}
               </h3>
