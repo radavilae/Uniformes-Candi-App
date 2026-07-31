@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import "./Navbar.css";
+import BrandLogo from "./BrandLogo";
 import { FiMenu, FiX } from "react-icons/fi";
 
 const Navbar = () => {
@@ -13,6 +14,7 @@ const Navbar = () => {
 
   const navItems = [
     { path: "/", label: "INICIO" },
+    { path: "/nosotros", label: "QUIENES SOMOS" },
     { path: "/productos", label: "PRODUCTOS" },
     { path: "/catalogo", label: "CATÁLOGO" },
     { path: "/contacto", label: "CONTACTO" },
@@ -22,7 +24,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="nav-brand">
-          <span className="brand-text">CANDI</span>
+          <BrandLogo />
         </Link>
 
         <button

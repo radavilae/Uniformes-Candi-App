@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import logo from "./assets/logo.jpg";
 import Navbar from "./components/Navbar";
 import ChatWidget from "./components/ChatWidget";
 import Nosotros from "./pages/Nosotros";
@@ -23,49 +22,10 @@ import Catalogo from "./pages/Catalogo";
 import { FiArrowRight, FiStar } from "react-icons/fi";
 
 function App() {
-  const [showNosotros, setShowNosotros] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
-  const [introFinished, setIntroFinished] = useState(false);
-
-  const handleLogoClick = () => setShowNosotros(true);
-  const handleClose = () => setShowNosotros(false);
-
-  useEffect(() => {
-    // Auto-hide intro after 49 seconds (full video duration)
-    const timer = setTimeout(() => {
-      skipIntro();
-    }, 49000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const skipIntro = () => {
-    setShowIntro(false);
-    setTimeout(() => setIntroFinished(true), 500);
-  };
-
   return (
     <Router>
       <div className="App">
-        {/* Video Intro */}
-        {showIntro && (
-          <div className="intro-video-container">
-            <iframe
-              src="https://player.mux.com/sOeilQisnfyn2I4adlUglkOC89xkmZlW2oSH1jDgIXY?autoplay=true&muted=false&loop=false&controls=true"
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowFullScreen
-              title="Videocandi Intro"
-              className="intro-video"
-              style={{ border: 'none', width: '100%', height: '100%' }}
-            />
-            <button className="skip-intro-btn" onClick={skipIntro}>
-              Saltar intro
-            </button>
-          </div>
-        )}
-
-        {/* Main Content */}
-        <div className={`main-content ${introFinished ? 'visible' : ''}`}>
+        <div className="main-content">
           <nav className="var">
             <Navbar />
           </nav>
@@ -89,17 +49,13 @@ function App() {
                       Descubre nuestra colección premium de uniformes diseñados para destacar
                     </p>
 
-                    <button
-                      onClick={handleLogoClick}
-                      className="logo-40anos-btn"
-                      aria-label="Mostrar información de Nosotros"
-                    >
+                    <div className="hero-logo-wrapper">
                       <img
                         src={c40anos}
                         alt="40 años Candi"
                         className="hero-logo"
                       />
-                    </button>
+                    </div>
 
                     <div className="hero-cta">
                       <a href="/productos" className="cta-button primary">
@@ -111,20 +67,6 @@ function App() {
                       </a>
                     </div>
                   </div>
-
-                  {showNosotros && (
-                    <div className="popup-overlay" onClick={handleClose}>
-                      <div
-                        className="popup-modal"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <button onClick={handleClose} aria-label="Cerrar">
-                          ×
-                        </button>
-                        <Nosotros />
-                      </div>
-                    </div>
-                  )}
 
                   <div className="hero-scroll-indicator">
                     <div className="scroll-dot"></div>
@@ -153,7 +95,6 @@ function App() {
           </Routes>
         </div>
 
-        {/* Chat Widget */}
         <ChatWidget />
       </div>
     </Router>

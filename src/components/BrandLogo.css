@@ -1,0 +1,37 @@
+.brand-logo {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.brand-logo--default {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+}
+
+.brand-logo--display {
+  display: block;
+  font-size: clamp(2.5rem, 8vw, 3.5rem);
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.brand-logo--watermark {
+  font-size: clamp(8rem, 60vw, 20rem);
+  color: #1a1a1a;
+  opacity: 0.04;
+  user-select: none;
+}
+
+@media screen and (min-width: 1025px) {
+  .brand-logo--default {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .brand-logo--default {
+    font-size: 1.3rem;
+  }
+}

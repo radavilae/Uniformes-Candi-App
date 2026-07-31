@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import candiContacto from "../assets/candi-contacto.jpg";
-import { FaFacebook, FaInstagram, FaPinterest } from "react-icons/fa";
+import BrandLogo from "../components/BrandLogo";
+import { buildWhatsAppUrl } from "../utils/whatsapp";
+import { FaFacebook, FaInstagram, FaPinterest, FaWhatsapp } from "react-icons/fa";
 
 const containerStyle = {
   display: "flex",
@@ -15,12 +16,6 @@ const textStyle = {
   textAlign: "center",
   maxWidth: "500px",
   color: "#fff",
-};
-
-const imageStyle = {
-  maxWidth: "300px",
-  marginBottom: "20px",
-  borderRadius: "10px",
 };
 
 const iconContainerStyle = {
@@ -72,13 +67,33 @@ const textareaStyle = {
 };
 
 const submitStyle = {
-  gridColumn: "1 / -1",
   padding: "12px 18px",
   borderRadius: "10px",
   border: "1px solid #e0e0e0",
   background: "#ffffff",
   color: "#000000",
   cursor: "pointer",
+};
+
+const whatsappButtonStyle = {
+  padding: "12px 18px",
+  borderRadius: "10px",
+  border: "none",
+  background: "#25D366",
+  color: "#ffffff",
+  cursor: "pointer",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "8px",
+  fontWeight: 600,
+};
+
+const buttonsRowStyle = {
+  gridColumn: "1 / -1",
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  gap: "12px",
 };
 
 const formHeaderStyle = {
@@ -90,20 +105,47 @@ const formHeaderStyle = {
 
 const Contacto = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     const action = form.getAttribute("action");
-    const formData = new FormData(form);
+    const data = new FormData(form);
     try {
-      await fetch(action, { method: "POST", body: formData, mode: "no-cors" });
+      await fetch(action, { method: "POST", body: data, mode: "no-cors" });
       setSubmitted(true);
       form.reset();
+      setFormData({ name: "", email: "", message: "" });
     } catch (_) {
       setSubmitted(true);
     }
   };
+
+  const handleWhatsApp = (e) => {
+    e.preventDefault();
+    const { name, email, message } = formData;
+    if (!name.trim() || !email.trim() || !message.trim()) return;
+
+    window.open(
+      buildWhatsAppUrl({ name, email, message }),
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  const whatsappLink = buildWhatsAppUrl({
+    message: "Hola, me gustaría recibir información sobre uniformes.",
+  });
 
   return (
   <>
@@ -123,16 +165,22 @@ const Contacto = () => {
           <input type="hidden" name="_subject" value="Nuevo mensaje desde Uniformes Candi" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
-          <input style={inputStyle} type="text" name="name" placeholder="Nombre" required />
-          <input style={inputStyle} type="email" name="email" placeholder="Email" required />
-          <textarea style={textareaStyle} name="message" placeholder="Mensaje" required />
-          <button style={submitStyle} type="submit">Enviar</button>
+          <input style={inputStyle} type="text" name="name" placeholder="Nombre" value={formData.name} onChange={handleChange} required />
+          <input style={inputStyle} type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
+          <textarea style={textareaStyle} name="message" placeholder="Mensaje" value={formData.message} onChange={handleChange} required />
+          <div style={buttonsRowStyle}>
+            <button style={submitStyle} type="submit">Enviar por email</button>
+            <button style={whatsappButtonStyle} type="button" onClick={handleWhatsApp}>
+              <FaWhatsapp size={18} />
+              Enviar por WhatsApp
+            </button>
+          </div>
         </form>
       )}
     </div>
     <div style={containerStyle}>
       <div style={textStyle}>
-        <img src={candiContacto} alt="Contacto" style={imageStyle} />
+        <BrandLogo variant="display" />
         <p>www.uniformescandi.com</p>
         <p>uniformescandiaguascalientes@gmail.com</p>
         <p>Tel. 449.916.65.34 / 449.916.34.01</p>
@@ -140,6 +188,9 @@ const Contacto = () => {
         <p>Navarrete 1031 Fracc. San Marcos</p>
         <p>CP 20070 Aguascalientes Ags. México</p>
         <div style={iconContainerStyle}>
+          <a href={whatsappLink} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <FaWhatsapp style={iconStyle} />
+          </a>
           <a href="https://www.facebook.com/uniformescandi/?locale=es_LA" target="_blank" rel="noopener noreferrer">
             <FaFacebook style={iconStyle} />
           </a>

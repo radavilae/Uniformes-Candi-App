@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.jpg";
 import { FiArrowRight, FiHeart, FiShoppingBag } from "react-icons/fi";
+import BrandLogo from "../components/BrandLogo";
 import "./Productos.css";
 
 // Chamarra photos
@@ -248,7 +248,7 @@ const Productos = () => {
   return (
     <div className="productos-page">
       <div className="productos-watermark">
-        <img src={logo} alt="Candi watermark" />
+        <BrandLogo variant="watermark" />
       </div>
       
       <div className="productos-header">

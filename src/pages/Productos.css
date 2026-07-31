@@ -20,14 +20,6 @@
   z-index: 0;
 }
 
-.productos-watermark img {
-  width: 60vw;
-  max-width: 800px;
-  min-width: 360px;
-  opacity: 0.04;
-  filter: grayscale(100%);
-}
-
 .productos-header {
   text-align: center;
   padding: 60px 20px 40px;

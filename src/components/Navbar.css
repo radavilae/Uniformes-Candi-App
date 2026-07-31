@@ -26,14 +26,6 @@
   align-items: center;
 }
 
-.brand-text {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-weight: 800;
-  font-size: 1.5rem;
-  color: #1a1a1a;
-  letter-spacing: -0.5px;
-}
-
 /* Hamburger Menu */
 .hamburger-menu {
   display: none;
@@ -140,10 +132,6 @@
     font-size: 1.5rem;
     font-weight: 600;
   }
-
-  .brand-text {
-    font-size: 1.3rem;
-  }
 }
 
 /* Tablet */
@@ -165,10 +153,6 @@
 @media screen and (min-width: 1025px) {
   .navbar-container {
     padding: 1rem 2.5rem;
-  }
-
-  .brand-text {
-    font-size: 1.6rem;
   }
 
   .nav-links {
