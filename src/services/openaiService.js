@@ -8,17 +8,20 @@ INFORMACIÓN DE LA EMPRESA:
 - 40 años de experiencia (1985-2025)
 - Productos: chamarras, chalecos, pantalones, playeras, sudaderas, faldas, suéteres, batas, mandiles
 - Tallas: XS a 5XL
-- Envíos: Todo México, 3-5 días hábiles CDMY/área metropolitana
+- Envíos: Todo México, 3-5 días hábiles para CDMX/área metropolitana
 - Horario: Lunes a viernes 9AM-7PM, sábados 9AM-2PM
-- Contacto: 55-1234-5678, contacto@uniformescandi.com
+- Contacto: Tel. 449.916.65.34 / 449.111.44.80, Email: uniformescandiaguascalientes@gmail.com
+- Ubicación: Navarrete 1031 Fracc. San Marcos, CP 20070 Aguascalientes Ags. México
 - Personalización: Logos, nombres, bordes disponibles
+- Mínimo de pedido para uniformes personalizados: Consultar con ventas
 
 TU ROL:
 - Ser amable, profesional y servicial
-- Responder preguntas sobre productos, precios, tallas, envíos
-- Ayudar con cotizaciones y personalización
+- Responder preguntas sobre productos, precios, tallas, envíos y personalización
+- Ayudar con cotizaciones: Si el usuario pide un precio, indícale que los precios varían según el material, cantidad y diseño, y ofrece generar una cotización o enviarlos a WhatsApp/llamada para un precio exacto.
 - Usar un tono cercano pero profesional
-- Si no sabes algo, sugiere contactar al equipo de ventas
+- Si no sabes algo específico (como precios exactos o disponibilidad de talla específica), sugiere contactar al equipo de ventas por teléfono o WhatsApp.
+- Nunca inventes precios.
 
 Responde de manera concisa y útil, máximo 2-3 párrafos.`;
 
@@ -63,34 +66,34 @@ const getFallbackResponse = (userMessage) => {
   const lowerMessage = userMessage.toLowerCase();
   
   if (lowerMessage.includes('precio') || lowerMessage.includes('costo')) {
-    return "Nuestros precios varían según el tipo de uniforme y cantidad. ¿Te gustaría recibir una cotización personalizada?";
+    return "Los precios varían según el material, la cantidad y el diseño de los uniformes. ¿Te gustaría que te envíe una cotización o prefieres llamarnos al 449.916.65.34 para darte un precio exacto?";
   }
   
   if (lowerMessage.includes('talla') || lowerMessage.includes('medida')) {
-    return "Contamos con tallas desde XS hasta 5XL. ¿Para qué tipo de uniforme necesitas las tallas?";
+    return "Contamos con tallas desde XS hasta 5XL. Para asegurar la mejor ajuste, te recomiendo consultar nuestra tabla de tallas. ¿Para qué tipo de uniforme necesitas las tallas?";
   }
   
   if (lowerMessage.includes('envio') || lowerMessage.includes('entrega')) {
-    return "Realizamos envíos a todo México. El tiempo de entrega es de 3-5 días hábiles para la CDMX y área metropolitana.";
+    return "Realizamos envíos a todo México. El tiempo de entrega es de 3-5 días hábiles para la CDMX y área metropolitana. Para otras zonas, el tiempo puede variar.";
   }
   
   if (lowerMessage.includes('catalogo') || lowerMessage.includes('productos')) {
-    return "Tenemos chamarras, chalecos, pantalones, playeras, sudaderas, faldas, suéteres, batas y mandiles. ¿Qué tipo te interesa?";
+    return "Tenemos una gran variedad de productos: chamarras, chalecos, pantalones, playeras, sudaderas, faldas, suéteres, batas y mandiles. Todos disponibles en tallas XS a 5XL y con opciones de personalización.";
   }
   
   if (lowerMessage.includes('contacto') || lowerMessage.includes('telefono')) {
-    return "Puedes contactarnos al 55-1234-5678 o por email a contacto@uniformescandi.com";
+    return "Puedes contactarnos al Tel. 449.916.65.34 / 449.111.44.80 o por email a uniformescandiaguascalientes@gmail.com. Estamos en Navarrete 1031 Fracc. San Marcos, Aguascalientes.";
   }
   
   if (lowerMessage.includes('horario') || lowerMessage.includes('abierto')) {
-    return "Nuestro horario es lunes a viernes 9AM-7PM, sábados 9AM-2PM";
+    return "Nuestro horario es de lunes a viernes de 9AM a 7PM, y sábados de 9AM a 2PM.";
   }
   
   if (lowerMessage.includes('personalizado') || lowerMessage.includes('logo')) {
-    return "¡Sí! Ofrecemos personalización con logos, nombres y bordes. Cuéntame más sobre tu proyecto.";
+    return "¡Sí! Ofrecemos servicios de personalización con logotipos, nombres y bordes. Cuéntame más sobre lo que necesitas para tu empresa o escuela.";
   }
   
-  return "Para brindarte la mejor asistencia, ¿podrías darme más detalles sobre lo que necesitas? Estoy aquí para ayudarte con información sobre nuestros uniformes.";
+  return "Para brindarte la mejor asistencia, ¿podrías darme más detalles sobre lo que necesitas? Estoy aquí para ayudarte con información sobre nuestros uniformes, tallas y personalización.";
 };
 
 export { getAIResponse };

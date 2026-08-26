@@ -1,5 +1,5 @@
-export const WHATSAPP_NUMBER = "524491112700";
-export const WHATSAPP_DISPLAY = "+52 449 111 2700";
+export const WHATSAPP_NUMBER = "521234567890";
+export const WHATSAPP_DISPLAY = "+52 123 456 7890";
 
 export function buildWhatsAppUrl({ name = "", email = "", message = "" } = {}) {
   const lines = [

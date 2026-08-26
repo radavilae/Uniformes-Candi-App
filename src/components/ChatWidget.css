@@ -59,6 +59,13 @@
     width: 55px;
     height: 55px;
   }
+
+  .chat-widget-whatsapp-float {
+    bottom: 90px;
+    right: 25px;
+    width: 44px;
+    height: 44px;
+  }
 }
 
 @keyframes slideUp {
@@ -303,22 +310,58 @@
   cursor: not-allowed;
 }
 
-.chat-widget-whatsapp-link {
+.chat-widget-whatsapp-float {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #25d366;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 12px 20px;
-  background: #25d366;
-  color: white;
   text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: background 0.3s ease;
+  z-index: 998;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+  transition: all 0.3s ease;
 }
 
-.chat-widget-whatsapp-link:hover {
-  background: #1ebe57;
+.chat-widget-whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.5);
+}
+
+.chat-widget-whatsapp-tooltip {
+  position: absolute;
+  right: 58px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #333;
+  color: white;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.chat-widget-whatsapp-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px 0 6px 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent #333;
+}
+
+.chat-widget-whatsapp-float:hover .chat-widget-whatsapp-tooltip {
+  opacity: 1;
 }
 
 /* Scrollbar */
@@ -346,6 +389,13 @@
     right: 20px;
     width: 55px;
     height: 55px;
+  }
+
+  .chat-widget-whatsapp-float {
+    bottom: 85px;
+    right: 20px;
+    width: 42px;
+    height: 42px;
   }
 
   .chat-widget-window {
@@ -404,6 +454,13 @@
     height: 50px;
   }
 
+  .chat-widget-whatsapp-float {
+    bottom: 76px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+
   .chat-widget-window {
     max-height: 70vh;
   }
@@ -447,6 +504,13 @@
     right: 12px;
     width: 48px;
     height: 48px;
+  }
+
+  .chat-widget-whatsapp-float {
+    bottom: 68px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
   }
 
   .chat-widget-window {

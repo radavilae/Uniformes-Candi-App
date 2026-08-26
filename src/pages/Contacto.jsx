@@ -76,8 +76,10 @@ const submitStyle = {
 };
 
 const whatsappButtonStyle = {
-  padding: "12px 18px",
-  borderRadius: "10px",
+  padding: "0",
+  width: "48px",
+  height: "48px",
+  borderRadius: "50%",
   border: "none",
   background: "#25D366",
   color: "#ffffff",
@@ -85,7 +87,6 @@ const whatsappButtonStyle = {
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  gap: "8px",
   fontWeight: 600,
 };
 
@@ -169,11 +170,12 @@ const Contacto = () => {
           <input style={inputStyle} type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
           <textarea style={textareaStyle} name="message" placeholder="Mensaje" value={formData.message} onChange={handleChange} required />
           <div style={buttonsRowStyle}>
-            <button style={submitStyle} type="submit">Enviar por email</button>
-            <button style={whatsappButtonStyle} type="button" onClick={handleWhatsApp}>
-              <FaWhatsapp size={18} />
-              Enviar por WhatsApp
-            </button>
+            <button style={{ ...submitStyle, width: '100%' }} type="submit">Enviar por email</button>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <button style={whatsappButtonStyle} type="button" onClick={handleWhatsApp} aria-label="Enviar por WhatsApp">
+                <FaWhatsapp size={24} />
+              </button>
+            </div>
           </div>
         </form>
       )}

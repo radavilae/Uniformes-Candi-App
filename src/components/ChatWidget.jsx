@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FiMessageSquare, FiX, FiSend } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import { getAIResponse } from '../services/openaiService';
-import { buildWhatsAppUrl } from '../utils/whatsapp';
+import { buildWhatsAppUrl, WHATSAPP_DISPLAY } from '../utils/whatsapp';
 import './ChatWidget.css';
 
 const ChatWidget = () => {
@@ -78,20 +78,6 @@ const ChatWidget = () => {
     });
   };
 
-  const getWhatsAppLink = () => {
-    const userMessages = messages
-      .filter((message) => message.sender === 'user')
-      .map((message) => message.text);
-
-    const lastMessage = userMessages[userMessages.length - 1];
-
-    return buildWhatsAppUrl({
-      message: lastMessage
-        ? `Hola, estuve consultando en el chat de la web: "${lastMessage}"`
-        : "Hola, me gustaría recibir información sobre uniformes.",
-    });
-  };
-
   return (
     <>
       {/* Botón flotante */}
@@ -102,6 +88,18 @@ const ChatWidget = () => {
       >
         {isOpen ? <FiX size={24} /> : <FiMessageSquare size={24} />}
       </button>
+
+      {/* Botón flotante de WhatsApp */}
+      <a
+        href={buildWhatsAppUrl()}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="chat-widget-whatsapp-float"
+        aria-label="Contactar por WhatsApp"
+      >
+        <FaWhatsapp size={22} />
+        <span className="chat-widget-whatsapp-tooltip">{WHATSAPP_DISPLAY}</span>
+      </a>
 
       {/* Ventana de chat */}
       {isOpen && (
@@ -173,16 +171,6 @@ const ChatWidget = () => {
               <FiSend size={20} />
             </button>
           </form>
-
-          <a
-            href={getWhatsAppLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="chat-widget-whatsapp-link"
-          >
-            <FaWhatsapp size={18} />
-            Continuar por WhatsApp
-          </a>
         </div>
       )}
     </>
