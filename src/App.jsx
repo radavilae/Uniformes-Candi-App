@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import ChatWidget from "./components/ChatWidget";
@@ -58,13 +58,13 @@ function App() {
                     </div>
 
                     <div className="hero-cta">
-                      <a href="/productos" className="cta-button primary">
+                      <Link to="/productos" className="cta-button primary">
                         Ver Colección
                         <FiArrowRight className="cta-icon" />
-                      </a>
-                      <a href="/catalogo" className="cta-button secondary">
+                      </Link>
+                      <Link to="/catalogo" className="cta-button secondary">
                         Ver Catálogo
-                      </a>
+                      </Link>
                     </div>
                   </div>
 
