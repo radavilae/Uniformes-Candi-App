@@ -240,14 +240,13 @@
 }
 
 .hero-logo-wrapper {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   margin: 0 auto 50px;
   opacity: 0;
   animation: gentleFadeIn 1.2s ease-out 0.9s forwards;
-  border-radius: 50%;
-  overflow: hidden;
-  width: 300px;
-  height: 300px;
 }
 
 .hero-logo {
@@ -373,33 +372,6 @@
 }
 
 /* Responsive adjustments */
-@media screen and (max-width: 768px) {
-  .hero-title {
-    font-size: 2rem;
-  }
-  
-  .hero-logo {
-    width: 220px;
-    height: 220px;
-  }
-  
-  .logo-glow {
-    width: 260px;
-    height: 260px;
-  }
-  
-  .hero-cta {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .cta-button {
-    width: 100%;
-    max-width: 280px;
-    justify-content: center;
-  }
-}
-
 @media screen and (min-width: 768px) {
   .hero-logo {
     width: 320px;

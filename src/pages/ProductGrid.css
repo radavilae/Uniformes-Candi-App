@@ -6,7 +6,7 @@
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(260px, 340px));
+  grid-template-columns: repeat(3, minmax(min(260px, 1fr), 340px));
   gap: 80px;
   padding: 40px 60px;
   width: 100%;
@@ -18,7 +18,7 @@
 
 @media (max-width: 1024px) {
   .product-grid {
-    grid-template-columns: repeat(2, minmax(220px, 300px));
+    grid-template-columns: repeat(2, minmax(min(220px, 1fr), 300px));
     gap: 40px;
     padding: 30px 40px;
   }
@@ -26,7 +26,7 @@
 
 @media (max-width: 768px) {
   .product-grid {
-    grid-template-columns: repeat(2, minmax(180px, 250px));
+    grid-template-columns: repeat(2, minmax(min(180px, 1fr), 250px));
     gap: 30px;
     padding: 20px 24px;
   }
