@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiArrowRight, FiHeart, FiShoppingBag } from "react-icons/fi";
+import { FiArrowRight, FiHeart, FiShoppingBag, FiSearch, FiX } from "react-icons/fi";
 import BrandLogo from "../components/BrandLogo";
 import "./Productos.css";
 
@@ -209,6 +209,7 @@ const Productos = () => {
     bata1,
     playera1,
   ]);
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   const handleClick = (idx) => {
@@ -245,6 +246,20 @@ const Productos = () => {
     "2 modelos"
   ];
 
+  // Filtrado de productos basado en búsqueda
+  const filteredProducts = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return imgs.map((img, idx) => ({ img, idx }));
+    }
+
+    const query = searchQuery.toLowerCase();
+    return imgs.map((img, idx) => ({ img, idx }))
+      .filter(product => 
+        titles[product.idx].toLowerCase().includes(query) ||
+        descriptions[product.idx].toLowerCase().includes(query)
+      );
+  }, [searchQuery, imgs]);
+
   return (
     <div className="productos-page">
       <div className="productos-watermark">
@@ -257,59 +272,102 @@ const Productos = () => {
           Descubre nuestra línea completa de uniformes diseñados con los más altos estándares de calidad y estilo
         </p>
       </div>
+
+      {/* Barra de búsqueda */}
+      <div className="search-bar-container">
+        <div className="search-bar">
+          <FiSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder="Buscar productos..."
+            className="search-input"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            aria-label="Buscar productos"
+          />
+          {searchQuery && (
+            <button
+              className="clear-search"
+              onClick={() => setSearchQuery("")}
+              aria-label="Limpiar búsqueda"
+            >
+              <FiX size={16} />
+            </button>
+          )}
+        </div>
+        {searchQuery && (
+          <div className="search-results-count">
+            {filteredProducts.length} {filteredProducts.length === 1 ? 'resultado' : 'resultados'}
+          </div>
+        )}
+      </div>
       
       <div className="productos-grid">
-        {imgs.map((foto, idx) => {
-          return (
-            <div
-              key={idx}
-              className="product-card"
-              onClick={() => handleClick(idx)}
-            >
-              <div className="product-card-img-container">
-                <img src={foto} alt={titles[idx]} className="product-card-img" />
-                <div className="img-overlay"></div>
-                <div className="quick-actions">
-                  <button 
-                    className="action-button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                    }}
-                    title="Guardar"
-                  >
-                    <FiHeart size={18} />
-                  </button>
-                  <button 
-                    className="action-button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                    }}
-                    title="Añadir"
-                  >
-                    <FiShoppingBag size={18} />
-                  </button>
-                </div>
-              </div>
-              
-              <div className="product-card-content">
-                <div className="product-card-meta">
-                  <span className="meta-badge">{counts[idx]}</span>
-                  <span className="meta-badge premium">Premium</span>
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => {
+            return (
+              <div
+                key={product.idx}
+                className="product-card"
+                onClick={() => handleClick(product.idx)}
+              >
+                <div className="product-card-img-container">
+                  <img src={product.img} alt={titles[product.idx]} className="product-card-img" />
+                  <div className="img-overlay"></div>
+                  <div className="quick-actions">
+                    <button 
+                      className="action-button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                      title="Guardar"
+                    >
+                      <FiHeart size={18} />
+                    </button>
+                    <button 
+                      className="action-button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                      title="Añadir"
+                    >
+                      <FiShoppingBag size={18} />
+                    </button>
+                  </div>
                 </div>
                 
-                <h3 className="product-card-title">{titles[idx]}</h3>
-                <p className="product-card-description">{descriptions[idx]}</p>
-                
-                <div className="product-card-footer">
-                  <span className="view-details">Ver detalles</span>
-                  <div className="view-button">
-                    <FiArrowRight size={16} />
+                <div className="product-card-content">
+                  <div className="product-card-meta">
+                    <span className="meta-badge">{counts[product.idx]}</span>
+                    <span className="meta-badge premium">Premium</span>
+                  </div>
+                  
+                  <h3 className="product-card-title">{titles[product.idx]}</h3>
+                  <p className="product-card-description">{descriptions[product.idx]}</p>
+                  
+                  <div className="product-card-footer">
+                    <span className="view-details">Ver detalles</span>
+                    <div className="view-button">
+                      <FiArrowRight size={16} />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <div className="no-results">
+            <div className="no-results-icon">🔍</div>
+            <h3>No se encontraron productos</h3>
+            <p>Intenta con otra búsqueda</p>
+            <button 
+              className="clear-search-btn"
+              onClick={() => setSearchQuery("")}
+            >
+              Limpiar búsqueda
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

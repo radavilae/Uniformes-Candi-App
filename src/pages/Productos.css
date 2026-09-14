@@ -7,6 +7,121 @@
   overflow: hidden;
 }
 
+/* Search Bar */
+.search-bar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.search-bar {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 48px 14px 48px;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  background: white;
+}
+
+.search-input:focus {
+  border-color: #db1c7c;
+  box-shadow: 0 0 0 4px rgba(219, 28, 124, 0.1);
+}
+
+.search-input:focus + .search-icon {
+  color: #db1c7c;
+}
+
+.clear-search {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-search:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #666;
+}
+
+.search-results-count {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* No Results State */
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  grid-column: 1 / -1;
+}
+
+.no-results-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.no-results h3 {
+  font-size: 1.3rem;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.no-results p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.clear-search-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #db1c7c 0%, #e91e63 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.clear-search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(219, 28, 124, 0.3);
+}
+
 .productos-watermark {
   position: absolute;
   top: 0;
@@ -220,6 +335,28 @@
   .productos-header p {
     font-size: 0.9rem;
     max-width: 100%;
+  }
+
+  .search-bar-container {
+    padding: 16px;
+  }
+
+  .search-bar {
+    max-width: 100%;
+  }
+
+  .search-input {
+    padding: 12px 40px 12px 40px;
+    font-size: 0.9rem;
+  }
+
+  .search-icon {
+    left: 14px;
+    font-size: 1rem;
+  }
+
+  .clear-search {
+    right: 14px;
   }
 
   .productos-grid {

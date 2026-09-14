@@ -10,7 +10,7 @@ const ChatWidget = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "¡Hola! 👋 Soy el asistente virtual de Uniformes Candi. ¿En qué puedo ayudarte hoy?",
+      text: "Hola, soy el asistente virtual de Uniformes Candi. ¿En qué puedo ayudarte hoy?",
       sender: 'bot',
       timestamp: new Date()
     }
