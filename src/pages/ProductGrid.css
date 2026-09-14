@@ -16,6 +16,34 @@
   align-items: start;
 }
 
+.product-grid-2x2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(min(260px, 1fr), 340px));
+  gap: 40px;
+  padding: 40px 60px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .product-grid-2x2 {
+    grid-template-columns: repeat(2, minmax(min(180px, 1fr), 250px));
+    gap: 30px;
+    padding: 20px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid-2x2 {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 16px 16px;
+  }
+}
+
 @media (max-width: 1024px) {
   .product-grid {
     grid-template-columns: repeat(2, minmax(min(220px, 1fr), 300px));

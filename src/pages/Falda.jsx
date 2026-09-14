@@ -41,16 +41,11 @@ const Faldas = () => {
         ←
       </button>
       {/* Title removed as requested */}
-      <div className="product-grid">
+      <div className="product-grid-2x2">
         {faldaImages.map((img, idx) => (
           <div
             key={idx}
             className="image-card"
-            style={{
-              ...(faldaImages.length === 4 && idx === faldaImages.length - 1
-                ? { gridColumn: "2 / span 1" }
-                : {}),
-            }}
             onClick={() => handleImageClick(img, idx)}
             onMouseOver={(e) => {
               const imageEl = e.currentTarget.querySelector("img");
