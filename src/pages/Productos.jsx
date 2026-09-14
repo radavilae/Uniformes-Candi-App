@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiArrowRight, FiHeart, FiShoppingBag, FiSearch, FiX } from "react-icons/fi";
+import { FiArrowRight, FiHeart, FiSearch, FiX } from "react-icons/fi";
+import { FaHeart } from "react-icons/fa";
 import BrandLogo from "../components/BrandLogo";
 import "./Productos.css";
 
@@ -210,7 +211,25 @@ const Productos = () => {
     playera1,
   ]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("candi-favorites") || "[]");
+    } catch {
+      return [];
+    }
+  });
   const navigate = useNavigate();
+
+  const toggleFavorite = (idx, e) => {
+    e.stopPropagation();
+    setFavorites((prev) => {
+      const next = prev.includes(idx)
+        ? prev.filter((i) => i !== idx)
+        : [...prev, idx];
+      localStorage.setItem("candi-favorites", JSON.stringify(next));
+      return next;
+    });
+  };
 
   const handleClick = (idx) => {
     const routeMapping = [1, 2, 3, 4, 7, 6, 8, 12, 10, 9, 11];
@@ -315,23 +334,27 @@ const Productos = () => {
                   <img src={product.img} alt={titles[product.idx]} className="product-card-img" />
                   <div className="img-overlay"></div>
                   <div className="quick-actions">
-                    <button 
-                      className="action-button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                      }}
-                      title="Guardar"
+                    <button
+                      className={`action-button ${
+                        favorites.includes(product.idx) ? "active" : ""
+                      }`}
+                      onClick={(e) => toggleFavorite(product.idx, e)}
+                      title={
+                        favorites.includes(product.idx)
+                          ? "Quitar de favoritos"
+                          : "Agregar a favoritos"
+                      }
+                      aria-label={
+                        favorites.includes(product.idx)
+                          ? "Quitar de favoritos"
+                          : "Agregar a favoritos"
+                      }
                     >
-                      <FiHeart size={18} />
-                    </button>
-                    <button 
-                      className="action-button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                      }}
-                      title="Añadir"
-                    >
-                      <FiShoppingBag size={18} />
+                      {favorites.includes(product.idx) ? (
+                        <FaHeart size={24} />
+                      ) : (
+                        <FiHeart size={24} />
+                      )}
                     </button>
                   </div>
                 </div>
