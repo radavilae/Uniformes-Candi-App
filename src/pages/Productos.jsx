@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiArrowRight, FiHeart, FiSearch, FiX } from "react-icons/fi";
-import { FaHeart } from "react-icons/fa";
 import BrandLogo from "../components/BrandLogo";
 import "./Productos.css";
 
@@ -351,7 +350,7 @@ const Productos = () => {
                       }
                     >
                       {favorites.includes(product.idx) ? (
-                        <FaHeart size={24} />
+                        <FiHeart size={24} fill="#db1c7c" />
                       ) : (
                         <FiHeart size={24} />
                       )}

@@ -235,16 +235,30 @@
 }
 
 .action-button {
-  background: none;
+  background: rgba(255, 255, 255, 0.9);
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #ffffff;
+  color: #666;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
-  padding: 4px;
+  padding: 8px;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+}
+
+.action-button:hover {
+  background: white;
+  color: #db1c7c;
+  transform: scale(1.1);
+}
+
+.action-button.active {
+  background: white;
+  color: #db1c7c;
 }
 
 .action-button:hover {
